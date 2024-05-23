@@ -1,12 +1,8 @@
 package it.poliba.cmg.sscentry;
 
-
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,11 +10,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView testo= findViewById(R.id.testo);
-        testo.setText("Ciao Chiara e Giuseppe");
 
-        RDFmanager.runRDFmanager();
+        TextView textView = findViewById(R.id.textView);
 
+        // Execute the RDF manager and get the result
+        String rdfOutput = RDFManager.generateRDF();
 
+        // Set the RDF output to the TextView
+        textView.setText(rdfOutput);
     }
 }

@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "it.poliba.cmg.sscentry"
-        minSdk 34
+        minSdk 27  // Modifica secondo le tue necessità
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -26,16 +26,72 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'org/apache/commons/codec/language/bm/gen_approx_greeklatin.txt'
+    }
 }
 
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation files('libs\\eclipse-rdf4j-4.3.11-onejar.jar')
-    //implementation 'org.eclipse.rdf4j:rdf4j-runtime:5.0.0-M2'
+
+    // OkHttp Dependency
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+
+    // RDF4J Dependencies
+    implementation('org.eclipse.rdf4j:rdf4j-model:4.3.11') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore'
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore-osgi'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient-cache'
+        exclude group: 'org.apache.httpcomponents', module: 'fluent-hc'
+        exclude group: 'org.apache.httpcomponents', module: 'httpmime'
+        exclude group: 'commons-codec', module: 'commons-codec'
+    }
+    implementation('org.eclipse.rdf4j:rdf4j-repository-sail:4.3.11') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore'
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore-osgi'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient-cache'
+        exclude group: 'org.apache.httpcomponents', module: 'fluent-hc'
+        exclude group: 'org.apache.httpcomponents', module: 'httpmime'
+        exclude group: 'commons-codec', module: 'commons-codec'
+    }
+    implementation('org.eclipse.rdf4j:rdf4j-sail-memory:4.3.11') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore'
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore-osgi'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient-cache'
+        exclude group: 'org.apache.httpcomponents', module: 'fluent-hc'
+        exclude group: 'org.apache.httpcomponents', module: 'httpmime'
+        exclude group: 'commons-codec', module: 'commons-codec'
+    }
+
+    // Aggiungere Xerces per DatatypeFactory
+    implementation 'xerces:xercesImpl:2.12.2'
+
+    // Test Dependencies
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+// Escludere le versioni duplicate delle librerie problematiche
+configurations {
+    all {
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore'
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore-osgi'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient-cache'
+        exclude group: 'org.apache.httpcomponents', module: 'fluent-hc'
+        exclude group: 'org.apache.httpcomponents', module: 'httpmime'
+        exclude group: 'commons-codec', module: 'commons-codec'
+    }
 }
