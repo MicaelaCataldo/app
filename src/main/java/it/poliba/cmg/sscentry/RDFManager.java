@@ -9,6 +9,7 @@ import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Values;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
@@ -28,8 +29,6 @@ public class RDFManager {
 
         // Create a ValueFactory to create RDF objects
         ValueFactory factory = SimpleValueFactory.getInstance();
-
-        // Create IRIs for different concepts
         IRI Study = factory.createIRI(disco, "Study");
         IRI Questionnaire = factory.createIRI(disco, "Questionnaire");
         IRI Question = factory.createIRI(disco, "Question");
@@ -40,6 +39,8 @@ public class RDFManager {
         IRI ConceptScheme = factory.createIRI(disco, "ConceptScheme");
         IRI Concept = factory.createIRI(disco, "Concept");
         IRI RepresentedVariable = factory.createIRI(disco, "RepresentedVariable");
+
+        // Create IRIs for different concepts
 
         // Create the relationships (predicates)
         IRI question = factory.createIRI(disco, "question");
@@ -55,23 +56,47 @@ public class RDFManager {
         IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
         IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
 
+
+
+        IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
+        IRI Question1 = factory.createIRI(cmg_vocabulary, "Question1");
+        IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
+        IRI ConceptScheme1 = factory.createIRI(cmg_vocabulary, "ConceptScheme1");
+        IRI Concept1_1 = factory.createIRI(cmg_vocabulary, "Concept1_1");
+        IRI Concept1_2 = factory.createIRI(cmg_vocabulary, "Concept1_2");
+        IRI Concept1_3 = factory.createIRI(cmg_vocabulary, "Concept1_3");
+        IRI Concept1_4 = factory.createIRI(cmg_vocabulary, "Concept1_4");
+        IRI RepresentedVariable1 = factory.createIRI(cmg_vocabulary, "RepresentedVariable1");
+        IRI question1 = factory.createIRI(cmg_vocabulary, "question1");
+        IRI hasScore1 = factory.createIRI(cmg_vocabulary, "hasScore1");
+
         // Create the statements using ModelBuilder
         ModelBuilder builder = new ModelBuilder();
 
-        builder.add(Study, instrument, Questionnaire);
-        builder.add(Questionnaire, question, Question);
-        builder.add(question, section, Values.literal("SectionName"));
-        builder.add(Question, questionText, Values.literal("QuestionText")); // guardalo nel grafo Prezi
-        builder.add(LogicalDataset, instrument, Questionnaire);
-        builder.add(LogicalDataset, aggregation, Dataset);
-        builder.add(aggregation, hasDate, Values.literal("TimeStamp"));  // cercalo il tipo di dato adatto + vedi Prezi
-        builder.add(Observation, dataset, Dataset);
-        builder.add(Observation, inputVariable, Variable);
-        builder.add(Variable, question, Question);
-        builder.add(Variable, basedOn, RepresentedVariable);
-        builder.add(RepresentedVariable, representation, ConceptScheme);
-        builder.add(ConceptScheme, hasTopConcept, Concept);
-        builder.add(hasTopConcept, hasDate, Values.literal("Score"));
+        builder.add(Study, instrument, QuestionnaireUCLA);
+        builder.add(QuestionnaireUCLA, RDF.TYPE, Questionnaire);
+        builder.add(Question1, RDF.TYPE, Question);
+        builder.add(question1, RDF.TYPE, question);
+        builder.add(QuestionnaireUCLA, question1, Question1);
+        builder.add(question1, section, Values.literal("Reflux"));
+        builder.add(Question1, questionText, Values.literal("In the past 1 week, how often did you have difficulty swallowing solid food?")); // guardalo nel grafo Prezi
+        builder.add(Variable1, question1, Question1);
+        builder.add(Variable1, RDF.TYPE, Variable);
+        builder.add(RepresentedVariable1, RDF.TYPE, RepresentedVariable);
+        builder.add(Variable1, basedOn, RepresentedVariable1);
+        builder.add(ConceptScheme1, RDF.TYPE, ConceptScheme);
+        builder.add(RepresentedVariable1, representation, ConceptScheme1);
+        builder.add(Concept1_1, RDF.TYPE, Concept);
+        builder.add(Concept1_2, RDF.TYPE, Concept);
+        builder.add(Concept1_3, RDF.TYPE, Concept);
+        builder.add(Concept1_4, RDF.TYPE, Concept);
+        builder.add(ConceptScheme1, hasTopConcept, Concept1_1);
+        builder.add(ConceptScheme1, hasTopConcept, Concept1_2);
+        builder.add(ConceptScheme1, hasTopConcept, Concept1_3);
+        builder.add(ConceptScheme1, hasTopConcept, Concept1_4);
+        builder.add(hasScore1, RDF.TYPE, hasScore);
+        builder.add(hasTopConcept, hasScore1, Values.literal("Score"));
+
 
         // Build the model
         model = builder.build();
