@@ -2,22 +2,10 @@ package it.poliba.cmg.sscentry;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Values;
-import org.eclipse.rdf4j.repository.Repository;
-import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.sail.SailRepository;
-import org.eclipse.rdf4j.sail.memory.MemoryStore;
-
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
-
 
 public class RDFManager {
 
@@ -25,41 +13,56 @@ public class RDFManager {
         StringBuilder result = new StringBuilder();
 
         // Define the namespace
-        String DISCO = "http://rdf-vocabulary.ddialliance.org/discovery#";
+        String disco = "http://rdf-vocabulary.ddialliance.org/discovery#";
+        String qb = "https://www.w3.org/TR/vocab-data-cube/#";
+        String cmg_vocabulary = "http://example.org/cmg_vocabulary#";
 
         // Create a ValueFactory to create RDF objects
         ValueFactory factory = SimpleValueFactory.getInstance();
 
         // Create IRIs for different concepts
-        IRI study = factory.createIRI(DISCO, "Study");
-        IRI questionnaire = factory.createIRI(DISCO, "Questionnaire");
-        IRI logicalDataset = factory.createIRI(DISCO, "LogicalDataset");
-        IRI dataset = factory.createIRI(DISCO, "Dataset");
-        IRI observation = factory.createIRI(DISCO, "Observation");
-        IRI question = factory.createIRI(DISCO, "Question");
-        IRI variable = factory.createIRI(DISCO, "Variable");
-        IRI conceptScheme = factory.createIRI(DISCO, "ConceptScheme");
-        IRI concept = factory.createIRI(DISCO, "Concept");
+        IRI Study = factory.createIRI(disco, "Study");
+        IRI Questionnaire = factory.createIRI(disco, "Questionnaire");
+        IRI Question = factory.createIRI(disco, "Question");
+        IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
+        IRI Dataset = factory.createIRI(qb, "Dataset");
+        IRI Observation = factory.createIRI(qb, "Observation");
+        IRI Variable = factory.createIRI(disco, "Variable");
+        IRI ConceptScheme = factory.createIRI(disco, "ConceptScheme");
+        IRI Concept = factory.createIRI(disco, "Concept");
+        IRI RepresentedVariable = factory.createIRI(disco, "RepresentedVariable");
 
         // Create the relationships (predicates)
-        IRI hasQuestion = factory.createIRI(DISCO, "hasQuestion");
-        IRI hasVariable = factory.createIRI(DISCO, "hasVariable");
-        IRI hasObservation = factory.createIRI(DISCO, "hasObservation");
-        IRI hasConcept = factory.createIRI(DISCO, "hasConcept");
-        IRI basedOn = factory.createIRI(DISCO, "basedOn");
-        IRI responseDomain = factory.createIRI(DISCO, "responseDomain");
-        IRI sectionName = factory.createIRI(DISCO, "sectionName");
+        IRI question = factory.createIRI(disco, "question");
+        IRI questionText = factory.createIRI(disco, "questionText");
+        IRI hasTopConcept = factory.createIRI(disco, "hasTopConcept");
+        IRI basedOn = factory.createIRI(disco, "basedOn");
+        IRI representation = factory.createIRI(disco, "representation");
+        IRI instrument = factory.createIRI(disco, "instrument");
+        IRI aggregation = factory.createIRI(disco, "aggregation");
+        IRI dataset = factory.createIRI(qb, "dataset");
+        IRI inputVariable = factory.createIRI(qb, "inputVariable");
+        IRI section = factory.createIRI(cmg_vocabulary, "section");
+        IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
+        IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
 
         // Create the statements using ModelBuilder
         ModelBuilder builder = new ModelBuilder();
-        builder.add(questionnaire, hasQuestion, question);
-        builder.add(questionnaire, sectionName, Values.literal("sectionNameValue"));
-        builder.add(question, hasVariable, variable);
-        builder.add(question, responseDomain, conceptScheme);
-        builder.add(variable, basedOn, conceptScheme);
-        builder.add(conceptScheme, hasConcept, concept);
-        builder.add(logicalDataset, hasObservation, observation);
-        builder.add(observation, hasVariable, variable);
+
+        builder.add(Study, instrument, Questionnaire);
+        builder.add(Questionnaire, question, Question);
+        builder.add(question, section, Values.literal("SectionName"));
+        builder.add(Question, questionText, Values.literal("QuestionText")); // guardalo nel grafo Prezi
+        builder.add(LogicalDataset, instrument, Questionnaire);
+        builder.add(LogicalDataset, aggregation, Dataset);
+        builder.add(aggregation, hasDate, Values.literal("TimeStamp"));  // cercalo il tipo di dato adatto + vedi Prezi
+        builder.add(Observation, dataset, Dataset);
+        builder.add(Observation, inputVariable, Variable);
+        builder.add(Variable, question, Question);
+        builder.add(Variable, basedOn, RepresentedVariable);
+        builder.add(RepresentedVariable, representation, ConceptScheme);
+        builder.add(ConceptScheme, hasTopConcept, Concept);
+        builder.add(hasTopConcept, hasScore, Values.literal("Score"));
 
         // Build the model
         Model model = builder.build();
@@ -81,8 +84,3 @@ public class RDFManager {
         return result.toString();
     }
 }
-
-        // Append the statements to the result
-        //model.forEach(statement -> result.append(statement.toString()).append("\n"));
-
-        //return result.toString();

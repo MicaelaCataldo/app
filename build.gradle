@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "it.poliba.cmg.sscentry"
-        minSdk 27  // Modifica secondo le tue necessità
+        minSdk 28  // Modifica secondo le tue necessità
         targetSdk 34
         versionCode 1
         versionName "1.0"
