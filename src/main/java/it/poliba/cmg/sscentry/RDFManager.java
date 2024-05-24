@@ -1,13 +1,22 @@
 package it.poliba.cmg.sscentry;
 
+import android.content.Context;
+import android.net.Uri;
+import android.os.Environment;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Values;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.Rio;
+
+import java.io.OutputStream;
 
 public class RDFManager {
+
+    private static Model model;
 
     public static String generateRDF() {
         StringBuilder result = new StringBuilder();
@@ -62,10 +71,10 @@ public class RDFManager {
         builder.add(Variable, basedOn, RepresentedVariable);
         builder.add(RepresentedVariable, representation, ConceptScheme);
         builder.add(ConceptScheme, hasTopConcept, Concept);
-        builder.add(hasTopConcept, hasScore, Values.literal("Score"));
+        builder.add(hasTopConcept, hasDate, Values.literal("Score"));
 
         // Build the model
-        Model model = builder.build();
+        model = builder.build();
 
         // Convert statements to readable format
         model.forEach(statement -> {
@@ -82,5 +91,19 @@ public class RDFManager {
         });
 
         return result.toString();
+    }
+
+    public static boolean saveRDFToFile(Uri uri, Context context) {
+        try {
+            OutputStream outputStream = context.getContentResolver().openOutputStream(uri);
+            if (outputStream != null) {
+                Rio.write(model, outputStream, RDFFormat.TURTLE);
+                outputStream.close();
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
