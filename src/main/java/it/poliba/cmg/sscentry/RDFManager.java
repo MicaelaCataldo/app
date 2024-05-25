@@ -40,8 +40,6 @@ public class RDFManager {
         IRI Concept = factory.createIRI(disco, "Concept");
         IRI RepresentedVariable = factory.createIRI(disco, "RepresentedVariable");
 
-        // Create IRIs for different concepts
-
         // Create the relationships (predicates)
         IRI question = factory.createIRI(disco, "question");
         IRI questionText = factory.createIRI(disco, "questionText");
@@ -56,47 +54,74 @@ public class RDFManager {
         IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
         IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
 
-
-
+        // Create the istances (subjects, objects + predicates that will be used as subjects to create the statements) for UCLA Questionnaire
         IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
         IRI Question1 = factory.createIRI(cmg_vocabulary, "Question1");
         IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
         IRI ConceptScheme1 = factory.createIRI(cmg_vocabulary, "ConceptScheme1");
-        IRI Concept1_1 = factory.createIRI(cmg_vocabulary, "Concept1_1");
-        IRI Concept1_2 = factory.createIRI(cmg_vocabulary, "Concept1_2");
-        IRI Concept1_3 = factory.createIRI(cmg_vocabulary, "Concept1_3");
-        IRI Concept1_4 = factory.createIRI(cmg_vocabulary, "Concept1_4");
+        IRI Concept1 = factory.createIRI(cmg_vocabulary, "No Days");
+        IRI Concept2 = factory.createIRI(cmg_vocabulary, "1-2 Days");
+        IRI Concept3 = factory.createIRI(cmg_vocabulary, "3-4 Days");
+        IRI Concept4 = factory.createIRI(cmg_vocabulary, "5-7 Days");
         IRI RepresentedVariable1 = factory.createIRI(cmg_vocabulary, "RepresentedVariable1");
         IRI question1 = factory.createIRI(cmg_vocabulary, "question1");
         IRI hasScore1 = factory.createIRI(cmg_vocabulary, "hasScore1");
+        IRI hasTopConcept1 = factory.createIRI(cmg_vocabulary, "hasTopConcept1");
+        IRI hasTopConcept2 = factory.createIRI(cmg_vocabulary, "hasTopConcept2");
+        IRI hasTopConcept3 = factory.createIRI(cmg_vocabulary, "hasTopConcept3");
+        IRI hasTopConcept4 = factory.createIRI(cmg_vocabulary, "hasTopConcept4");
 
-        // Create the statements using ModelBuilder
+        // Create the istances for each question
+        IRI Question2 = factory.createIRI(cmg_vocabulary, "Question2");
+        IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
+        IRI question2 = factory.createIRI(cmg_vocabulary, "question2");
+        // ... da completare per le altre domande
+
+        // Create the model builder
         ModelBuilder builder = new ModelBuilder();
 
-        builder.add(Study, instrument, QuestionnaireUCLA);
+        // Create the statements using ModelBuilder
         builder.add(QuestionnaireUCLA, RDF.TYPE, Questionnaire);
+        builder.add(Study, instrument, QuestionnaireUCLA);
         builder.add(Question1, RDF.TYPE, Question);
         builder.add(question1, RDF.TYPE, question);
         builder.add(QuestionnaireUCLA, question1, Question1);
         builder.add(question1, section, Values.literal("Reflux"));
         builder.add(Question1, questionText, Values.literal("In the past 1 week, how often did you have difficulty swallowing solid food?")); // guardalo nel grafo Prezi
-        builder.add(Variable1, question1, Question1);
         builder.add(Variable1, RDF.TYPE, Variable);
+        builder.add(Variable1, question1, Question1);
         builder.add(RepresentedVariable1, RDF.TYPE, RepresentedVariable);
         builder.add(Variable1, basedOn, RepresentedVariable1);
         builder.add(ConceptScheme1, RDF.TYPE, ConceptScheme);
         builder.add(RepresentedVariable1, representation, ConceptScheme1);
-        builder.add(Concept1_1, RDF.TYPE, Concept);
-        builder.add(Concept1_2, RDF.TYPE, Concept);
-        builder.add(Concept1_3, RDF.TYPE, Concept);
-        builder.add(Concept1_4, RDF.TYPE, Concept);
-        builder.add(ConceptScheme1, hasTopConcept, Concept1_1);
-        builder.add(ConceptScheme1, hasTopConcept, Concept1_2);
-        builder.add(ConceptScheme1, hasTopConcept, Concept1_3);
-        builder.add(ConceptScheme1, hasTopConcept, Concept1_4);
+        builder.add(Concept1, RDF.TYPE, Concept);
+        builder.add(Concept2, RDF.TYPE, Concept);
+        builder.add(Concept3, RDF.TYPE, Concept);
+        builder.add(Concept4, RDF.TYPE, Concept);
+        builder.add(hasTopConcept1, RDF.TYPE, hasTopConcept);
+        builder.add(hasTopConcept2, RDF.TYPE, hasTopConcept);
+        builder.add(hasTopConcept3, RDF.TYPE, hasTopConcept);
+        builder.add(hasTopConcept4, RDF.TYPE, hasTopConcept);
+        builder.add(ConceptScheme1, hasTopConcept1, Concept1);
+        builder.add(ConceptScheme1, hasTopConcept2, Concept2);
+        builder.add(ConceptScheme1, hasTopConcept3, Concept3);
+        builder.add(ConceptScheme1, hasTopConcept4, Concept4);
         builder.add(hasScore1, RDF.TYPE, hasScore);
-        builder.add(hasTopConcept, hasScore1, Values.literal("Score"));
+        builder.add(hasTopConcept1, hasScore1, Values.literal("0"));
+        builder.add(hasTopConcept2, hasScore1, Values.literal("1"));
+        builder.add(hasTopConcept3, hasScore1, Values.literal("2"));
+        builder.add(hasTopConcept4, hasScore1, Values.literal("3"));
 
+        // Create the statements for each question
+        builder.add(Question, RDF.TYPE, Question);
+        builder.add(question2, RDF.TYPE, question);
+        builder.add(QuestionnaireUCLA, question2, Question2);
+        builder.add(question2, section, Values.literal("Reflux"));
+        builder.add(Question2, questionText, Values.literal("In the past 1 week, how often did you have an unpleasant stinging or burning sensation in your chest (heartburn)?"));
+        builder.add(Variable2, RDF.TYPE, Variable);
+        builder.add(Variable2, question2, Question2);
+        builder.add(Variable2, basedOn, RepresentedVariable1);
+        // ... da completare per le altre domande
 
         // Build the model
         model = builder.build();
