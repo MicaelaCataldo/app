@@ -14,6 +14,8 @@ import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 public class RDFManager {
@@ -21,11 +23,14 @@ public class RDFManager {
     public static final String disco = "http://rdf-vocabulary.ddialliance.org/discovery#";
     public static final String qb = "https://www.w3.org/TR/vocab-data-cube/#";
     public static final String cmg_vocabulary = "http://example.org/cmg_vocabulary#";
+    public static final String filename = "questionnaire.ttl";
+
+    // Create a ValueFactory to create RDF objects
+    public static ValueFactory factory = SimpleValueFactory.getInstance();
     private static Model model;
 
     public static String generateRDF() {
        String result=questionnaireUCLADefinition();
-
 
        return result;
     }
@@ -33,16 +38,11 @@ public class RDFManager {
     public static String questionnaireUCLADefinition(){
         StringBuilder result = new StringBuilder();
 
-        // Create a ValueFactory to create RDF objects
-        ValueFactory factory = SimpleValueFactory.getInstance();
-
         // Create the generic classes that will be instanciated as subjects and objects
         IRI Study = factory.createIRI(disco, "Study");
         IRI Questionnaire = factory.createIRI(disco, "Questionnaire");
         IRI Question = factory.createIRI(disco, "Question");
-        IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
-        IRI Dataset = factory.createIRI(qb, "Dataset");
-        IRI Observation = factory.createIRI(qb, "Observation");
+
         IRI Variable = factory.createIRI(disco, "Variable");
         IRI ConceptScheme = factory.createIRI(disco, "ConceptScheme");
         IRI Concept = factory.createIRI(disco, "Concept");
@@ -55,11 +55,9 @@ public class RDFManager {
         IRI basedOn = factory.createIRI(disco, "basedOn");
         IRI representation = factory.createIRI(disco, "representation");
         IRI instrument = factory.createIRI(disco, "instrument");
-        IRI aggregation = factory.createIRI(disco, "aggregation");
-        IRI dataset = factory.createIRI(qb, "dataset");
-        IRI inputVariable = factory.createIRI(qb, "inputVariable");
+
         IRI section = factory.createIRI(cmg_vocabulary, "section");
-        IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
+
         IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
 
         // Create the IRI of instances for UCLA Questionnaire
@@ -609,6 +607,40 @@ public class RDFManager {
         return false;
     }
 
+    public static String addAnswersUCLA(String ans1, String ans2, String ans3, String ans4, String ans5, String ans6, String ans7,
+                                        String ans8, String ans9, String ans10, String ans11, String ans12, String ans13, String ans14,
+                                        String ans15, String ans16, String ans17, String ans18, String ans19, String ans20, String ans21,
+                                        String ans22, String ans23, String ans24, String ans25, String ans26, String ans27, String ans28,
+                                        String ans29, String ans30, String ans31, String ans32, String ans33, String ans34){
 
 
+        IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
+        IRI Dataset = factory.createIRI(qb, "Dataset");
+        IRI Observation = factory.createIRI(qb, "Observation");
+        IRI aggregation = factory.createIRI(disco, "aggregation");
+        IRI dataset = factory.createIRI(qb, "dataset");
+        IRI inputVariable = factory.createIRI(qb, "inputVariable");
+        IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
+
+        return "";
+    }
+
+    public static Model openRDFgraph() throws IOException {
+        InputStream inputStream = RDFManager.class.getResourceAsStream("/" + filename);
+        Model model = Rio.parse(inputStream, "", RDFFormat.TURTLESTAR);
+
+       return model;
+    }
+
+    public static Model readRDFFromFile(Uri uri, Context context) {
+        try {
+            InputStream inputStream = context.getContentResolver().openInputStream(uri);
+            if (inputStream != null) {
+                return Rio.parse(inputStream, "", RDFFormat.TURTLESTAR);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
