@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView);
 
+        // Execute the RDF manager and get the result
+        String rdfOutput = RDFManager.generateRDF();
+
+        // Set the RDF output to the TextView
+        textView.setText(rdfOutput);
+
         // Initialize the ActivityResultLauncher for creating a document
         createDocumentLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -63,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         // Request permission to open a document
-        requestOpenDocument();
+        //requestOpenDocument();
 
         // Request permission to create a document
         requestCreateDocument();
