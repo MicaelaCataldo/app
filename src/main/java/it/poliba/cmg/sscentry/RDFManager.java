@@ -17,16 +17,21 @@ import org.eclipse.rdf4j.rio.Rio;
 import java.io.OutputStream;
 
 public class RDFManager {
-
+    // Define the namespace
+    public static final String disco = "http://rdf-vocabulary.ddialliance.org/discovery#";
+    public static final String qb = "https://www.w3.org/TR/vocab-data-cube/#";
+    public static final String cmg_vocabulary = "http://example.org/cmg_vocabulary#";
     private static Model model;
 
     public static String generateRDF() {
-        StringBuilder result = new StringBuilder();
+       String result=questionnaireUCLADefinition();
 
-        // Define the namespace
-        String disco = "http://rdf-vocabulary.ddialliance.org/discovery#";
-        String qb = "https://www.w3.org/TR/vocab-data-cube/#";
-        String cmg_vocabulary = "http://example.org/cmg_vocabulary#";
+
+       return result;
+    }
+
+    public static String questionnaireUCLADefinition(){
+        StringBuilder result = new StringBuilder();
 
         // Create a ValueFactory to create RDF objects
         ValueFactory factory = SimpleValueFactory.getInstance();
@@ -587,7 +592,6 @@ public class RDFManager {
 
             result.append(String.format("%s %s %s.\n", subjectName, predicateName, objectName));
         });
-
         return result.toString();
     }
 
@@ -604,4 +608,7 @@ public class RDFManager {
         }
         return false;
     }
+
+
+
 }
