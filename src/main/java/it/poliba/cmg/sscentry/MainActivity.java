@@ -26,13 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView);
 
-        // Execute the RDF manager and get the result
-        model = RDFManager.generateRDF();
-        RDFManager.printModel(model);
-
-        // Set the RDF output to the TextView
-        //textView.setText(rdfOutput);
-
         // Initialize the ActivityResultLauncher for creating a document
         createDocumentLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -40,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK) {
                         uri = result.getData().getData();
                         if (uri != null) {
+                            // Execute the RDF manager and get the result
+                            model = RDFManager.generateRDF();
                             boolean saved = RDFManager.saveRDFToFile(uri, this);
                             if (saved) {
                                 Toast.makeText(this, "RDF saved successfully", Toast.LENGTH_LONG).show();
@@ -64,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(this, "RDF read successfully", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(this, "Failed to read RDF", Toast.LENGTH_LONG).show();
+                                requestCreateDocument();
                             }
                         }
                     } else {
@@ -71,10 +67,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        // se il questionario non esiste lo creo
-        requestCreateDocument();  // creazione questionario vuoto (solo domande)
+        requestOpenDocument();
 
-        //requestOpenDocument();
         String ans1 = "1";
         String ans2 = "0";
         String ans3 = "1";
@@ -113,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 ans13, ans14, ans15, ans16, ans17, ans18, ans19, ans20, ans21, ans22, ans23, ans24, ans25, ans26,
                 ans27, ans28, ans29, ans30, ans31, ans32, ans33, ans34, model);
 
-
+        textView.setText(RDFManager.printModel(model));
     }
 
     private void requestCreateDocument() {
@@ -122,16 +116,14 @@ public class MainActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("text/turtle");
         intent.putExtra(Intent.EXTRA_TITLE, "questionnaire.ttl");
-
         createDocumentLauncher.launch(intent);
     }
-
     private void requestOpenDocument() {
         // Prepare the intent for opening a document
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("text/turtle");
-
         openDocumentLauncher.launch(intent);
     }
+
 }

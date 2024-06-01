@@ -17,6 +17,7 @@ import org.eclipse.rdf4j.rio.Rio;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.Instant;
 
 public class RDFManager {
     // Define the namespace
@@ -581,7 +582,7 @@ public class RDFManager {
 
     public static boolean saveRDFToFile(Uri uri, Context context) {
         try {
-            OutputStream outputStream = context.getContentResolver().openOutputStream(uri);
+            OutputStream outputStream = context.openFileOutput("data.ttl", Context.MODE_PRIVATE);
             if (outputStream != null) {
                 Rio.write(model, outputStream, RDFFormat.TURTLESTAR);
                 outputStream.close();
@@ -598,6 +599,42 @@ public class RDFManager {
                                         String ans15, String ans16, String ans17, String ans18, String ans19, String ans20, String ans21,
                                         String ans22, String ans23, String ans24, String ans25, String ans26, String ans27, String ans28,
                                         String ans29, String ans30, String ans31, String ans32, String ans33, String ans34, Model model){
+
+        IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
+        IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
+        IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
+        IRI Variable3 = factory.createIRI(cmg_vocabulary, "Variable3");
+        IRI Variable4 = factory.createIRI(cmg_vocabulary, "Variable4");
+        IRI Variable5 = factory.createIRI(cmg_vocabulary, "Variable5");
+        IRI Variable6 = factory.createIRI(cmg_vocabulary, "Variable6");
+        IRI Variable7 = factory.createIRI(cmg_vocabulary, "Variable7");
+        IRI Variable8 = factory.createIRI(cmg_vocabulary, "Variable8");
+        IRI Variable9 = factory.createIRI(cmg_vocabulary, "Variable9");
+        IRI Variable10 = factory.createIRI(cmg_vocabulary, "Variable10");
+        IRI Variable11 = factory.createIRI(cmg_vocabulary, "Variable11");
+        IRI Variable12 = factory.createIRI(cmg_vocabulary, "Variable12");
+        IRI Variable13 = factory.createIRI(cmg_vocabulary, "Variable13");
+        IRI Variable14 = factory.createIRI(cmg_vocabulary, "Variable14");
+        IRI Variable15 = factory.createIRI(cmg_vocabulary, "Variable15");
+        IRI Variable16 = factory.createIRI(cmg_vocabulary, "Variable16");
+        IRI Variable17 = factory.createIRI(cmg_vocabulary, "Variable17");
+        IRI Variable18 = factory.createIRI(cmg_vocabulary, "Variable18");
+        IRI Variable19 = factory.createIRI(cmg_vocabulary, "Variable19");
+        IRI Variable20 = factory.createIRI(cmg_vocabulary, "Variable20");
+        IRI Variable21 = factory.createIRI(cmg_vocabulary, "Variable21");
+        IRI Variable22 = factory.createIRI(cmg_vocabulary, "Variable22");
+        IRI Variable23 = factory.createIRI(cmg_vocabulary, "Variable23");
+        IRI Variable24 = factory.createIRI(cmg_vocabulary, "Variable24");
+        IRI Variable25 = factory.createIRI(cmg_vocabulary, "Variable25");
+        IRI Variable26 = factory.createIRI(cmg_vocabulary, "Variable26");
+        IRI Variable27 = factory.createIRI(cmg_vocabulary, "Variable27");
+        IRI Variable28 = factory.createIRI(cmg_vocabulary, "Variable28");
+        IRI Variable29 = factory.createIRI(cmg_vocabulary, "Variable29");
+        IRI Variable30 = factory.createIRI(cmg_vocabulary, "Variable30");
+        IRI Variable31 = factory.createIRI(cmg_vocabulary, "Variable31");
+        IRI Variable32 = factory.createIRI(cmg_vocabulary, "Variable32");
+        IRI Variable33 = factory.createIRI(cmg_vocabulary, "Variable33");
+        IRI Variable34 = factory.createIRI(cmg_vocabulary, "Variable34");
 
         IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
         IRI Dataset = factory.createIRI(qb, "Dataset");
@@ -651,254 +688,256 @@ public class RDFManager {
         IRI instrument1 = factory.createIRI(disco, "instrument1");
 
         // Create the model builder
-        ModelBuilder builder = new ModelBuilder();
+        ModelBuilder builder = new ModelBuilder(model);
+
+        builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
+        builder.add(LogicalDataset, instrument1, QuestionnaireUCLA);
+
         builder.add(Observation1, RDF.TYPE, Observation);
-// builder.add(Observation1, inputVariable, );
+        builder.add(Observation1, inputVariable, Variable1);
 
         builder.add(Observation2, RDF.TYPE, Observation);
-// builder.add(Observation2, inputVariable, );
+        builder.add(Observation2, inputVariable, Variable2);
 
         builder.add(Observation3, RDF.TYPE, Observation);
-// builder.add(Observation3, inputVariable, );
+        builder.add(Observation3, inputVariable, Variable3);
 
         builder.add(Observation4, RDF.TYPE, Observation);
-// builder.add(Observation4, inputVariable, );
+        builder.add(Observation4, inputVariable, Variable4);
 
         builder.add(Observation5, RDF.TYPE, Observation);
-// builder.add(Observation5, inputVariable, );
+        builder.add(Observation5, inputVariable, Variable5);
 
         builder.add(Observation6, RDF.TYPE, Observation);
-// builder.add(Observation6, inputVariable, );
+        builder.add(Observation6, inputVariable, Variable6);
 
         builder.add(Observation7, RDF.TYPE, Observation);
-// builder.add(Observation7, inputVariable, );
+        builder.add(Observation7, inputVariable, Variable7);
 
         builder.add(Observation8, RDF.TYPE, Observation);
-// builder.add(Observation8, inputVariable, );
+        builder.add(Observation8, inputVariable, Variable8);
 
         builder.add(Observation9, RDF.TYPE, Observation);
-// builder.add(Observation9, inputVariable, );
+        builder.add(Observation9, inputVariable, Variable9);
 
         builder.add(Observation10, RDF.TYPE, Observation);
-// builder.add(Observation10, inputVariable, );
+        builder.add(Observation10, inputVariable, Variable10);
 
         builder.add(Observation11, RDF.TYPE, Observation);
-// builder.add(Observation11, inputVariable, );
+        builder.add(Observation11, inputVariable, Variable11);
 
         builder.add(Observation12, RDF.TYPE, Observation);
-// builder.add(Observation12, inputVariable, );
+        builder.add(Observation12, inputVariable, Variable12);
 
         builder.add(Observation13, RDF.TYPE, Observation);
-// builder.add(Observation13, inputVariable, );
+        builder.add(Observation13, inputVariable, Variable13);
 
         builder.add(Observation14, RDF.TYPE, Observation);
-// builder.add(Observation14, inputVariable, );
+        builder.add(Observation14, inputVariable, Variable14);
 
         builder.add(Observation15, RDF.TYPE, Observation);
-// builder.add(Observation15, inputVariable, );
+        builder.add(Observation15, inputVariable, Variable15);
 
         builder.add(Observation16, RDF.TYPE, Observation);
-// builder.add(Observation16, inputVariable, );
+        builder.add(Observation16, inputVariable, Variable16);
 
         builder.add(Observation17, RDF.TYPE, Observation);
-// builder.add(Observation17, inputVariable, );
+        builder.add(Observation17, inputVariable, Variable17);
 
         builder.add(Observation18, RDF.TYPE, Observation);
-// builder.add(Observation18, inputVariable, );
+        builder.add(Observation18, inputVariable, Variable18);
 
         builder.add(Observation19, RDF.TYPE, Observation);
-// builder.add(Observation19, inputVariable, );
+        builder.add(Observation19, inputVariable, Variable19);
 
         builder.add(Observation20, RDF.TYPE, Observation);
-// builder.add(Observation20, inputVariable, );
+        builder.add(Observation20, inputVariable, Variable20);
 
         builder.add(Observation21, RDF.TYPE, Observation);
-// builder.add(Observation21, inputVariable, );
+        builder.add(Observation21, inputVariable, Variable21);
 
         builder.add(Observation22, RDF.TYPE, Observation);
-// builder.add(Observation22, inputVariable, );
+        builder.add(Observation22, inputVariable, Variable22);
 
         builder.add(Observation23, RDF.TYPE, Observation);
-// builder.add(Observation23, inputVariable, );
+        builder.add(Observation23, inputVariable, Variable23);
 
         builder.add(Observation24, RDF.TYPE, Observation);
-// builder.add(Observation24, inputVariable, );
+        builder.add(Observation24, inputVariable, Variable24);
 
         builder.add(Observation25, RDF.TYPE, Observation);
-// builder.add(Observation25, inputVariable, );
+        builder.add(Observation25, inputVariable, Variable25);
 
         builder.add(Observation26, RDF.TYPE, Observation);
-        // builder.add(Observation26, inputVariable, );
+        builder.add(Observation26, inputVariable, Variable26);
 
         builder.add(Observation27, RDF.TYPE, Observation);
-        // builder.add(Observation27, inputVariable, );
+        builder.add(Observation27, inputVariable, Variable27);
 
         builder.add(Observation28, RDF.TYPE, Observation);
-        // builder.add(Observation28, inputVariable, );
+        builder.add(Observation28, inputVariable, Variable28);
 
         builder.add(Observation29, RDF.TYPE, Observation);
-        // builder.add(Observation29, inputVariable, );
+        builder.add(Observation29, inputVariable, Variable29);
 
         builder.add(Observation30, RDF.TYPE, Observation);
-        // builder.add(Observation30, inputVariable, );
+        builder.add(Observation30, inputVariable, Variable30);
 
         builder.add(Observation31, RDF.TYPE, Observation);
-        // builder.add(Observation31, inputVariable, );
+        builder.add(Observation31, inputVariable, Variable31);
 
         builder.add(Observation32, RDF.TYPE, Observation);
-        // builder.add(Observation32, inputVariable, );
+        builder.add(Observation32, inputVariable, Variable32);
 
         builder.add(Observation33, RDF.TYPE, Observation);
-        // builder.add(Observation33, inputVariable, );
+        builder.add(Observation33, inputVariable, Variable33);
 
         builder.add(Observation34, RDF.TYPE, Observation);
-        // builder.add(Observation34, inputVariable, );
+        builder.add(Observation34, inputVariable, Variable34);
 
         Triple tr_dataset = factory.createTriple(Observation1, dataset1, Dataset1);
         builder.add(Dataset1, RDF.TYPE, Dataset);
         builder.add(tr_dataset, RDF.TYPE, dataset);
-        builder.add(tr_dataset, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset1 = factory.createTriple(Observation1, dataset1, Dataset1);
         builder.add(tr_dataset1, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset1, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset1, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset2 = factory.createTriple(Observation2, dataset1, Dataset1);
         builder.add(tr_dataset2, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset2, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset2, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset3 = factory.createTriple(Observation3, dataset1, Dataset1);
         builder.add(tr_dataset3, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset3, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset3, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset4 = factory.createTriple(Observation4, dataset1, Dataset1);
         builder.add(tr_dataset4, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset4, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset4, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset5 = factory.createTriple(Observation5, dataset1, Dataset1);
         builder.add(tr_dataset5, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset5, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset5, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset6 = factory.createTriple(Observation6, dataset1, Dataset1);
         builder.add(tr_dataset6, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset6, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset6, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset7 = factory.createTriple(Observation7, dataset1, Dataset1);
         builder.add(tr_dataset7, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset7, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset7, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset8 = factory.createTriple(Observation8, dataset1, Dataset1);
         builder.add(tr_dataset8, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset8, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset8, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset9 = factory.createTriple(Observation9, dataset1, Dataset1);
         builder.add(tr_dataset9, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset9, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset9, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset10 = factory.createTriple(Observation10, dataset1, Dataset1);
         builder.add(tr_dataset10, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset10, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset10, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset11 = factory.createTriple(Observation11, dataset1, Dataset1);
         builder.add(tr_dataset11, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset11, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset11, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset12 = factory.createTriple(Observation12, dataset1, Dataset1);
         builder.add(tr_dataset12, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset12, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset12, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset13 = factory.createTriple(Observation13, dataset1, Dataset1);
         builder.add(tr_dataset13, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset13, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset13, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset14 = factory.createTriple(Observation14, dataset1, Dataset1);
         builder.add(tr_dataset14, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset14, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset14, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset15 = factory.createTriple(Observation15, dataset1, Dataset1);
         builder.add(tr_dataset15, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset15, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset15, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset16 = factory.createTriple(Observation16, dataset1, Dataset1);
         builder.add(tr_dataset16, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset16, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset16, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset17 = factory.createTriple(Observation17, dataset1, Dataset1);
         builder.add(tr_dataset17, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset17, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset17, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset18 = factory.createTriple(Observation18, dataset1, Dataset1);
         builder.add(tr_dataset18, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset18, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset18, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset19 = factory.createTriple(Observation19, dataset1, Dataset1);
         builder.add(tr_dataset19, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset19, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset19, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset20 = factory.createTriple(Observation20, dataset1, Dataset1);
         builder.add(tr_dataset20, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset20, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset20, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset21 = factory.createTriple(Observation21, dataset1, Dataset1);
         builder.add(tr_dataset21, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset21, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset21, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset22 = factory.createTriple(Observation22, dataset1, Dataset1);
         builder.add(tr_dataset22, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset22, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset22, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset23 = factory.createTriple(Observation23, dataset1, Dataset1);
         builder.add(tr_dataset23, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset23, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset23, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset24 = factory.createTriple(Observation24, dataset1, Dataset1);
         builder.add(tr_dataset24, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset24, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset24, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset25 = factory.createTriple(Observation25, dataset1, Dataset1);
         builder.add(tr_dataset25, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset25, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset25, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset26 = factory.createTriple(Observation26, dataset1, Dataset1);
         builder.add(tr_dataset26, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset26, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset26, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset27 = factory.createTriple(Observation27, dataset1, Dataset1);
         builder.add(tr_dataset27, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset27, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset27, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset28 = factory.createTriple(Observation28, dataset1, Dataset1);
         builder.add(tr_dataset28, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset28, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset28, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset29 = factory.createTriple(Observation29, dataset1, Dataset1);
         builder.add(tr_dataset29, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset29, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset29, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset30 = factory.createTriple(Observation30, dataset1, Dataset1);
         builder.add(tr_dataset30, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset30, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset30, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset31 = factory.createTriple(Observation31, dataset1, Dataset1);
         builder.add(tr_dataset31, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset31, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset31, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset32 = factory.createTriple(Observation32, dataset1, Dataset1);
         builder.add(tr_dataset32, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset32, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset32, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset33 = factory.createTriple(Observation33, dataset1, Dataset1);
         builder.add(tr_dataset33, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset33, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset33, hasDate1, Values.literal(Instant.now()));
 
         Triple tr_dataset34 = factory.createTriple(Observation34, dataset1, Dataset1);
         builder.add(tr_dataset34, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset34, hasDate1, Values.literal("timestamp"));
+        builder.add(tr_dataset34, hasDate1, Values.literal(Instant.now()));
 
         builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
-
-        // manca lo statement che colleghi LogicalDataset1 con Questionnaire tramite instrument
 
         model = builder.build();
 
@@ -931,9 +970,11 @@ public class RDFManager {
 
     public static Model readRDFFromFile(Uri uri, Context context) {
         try {
-            InputStream inputStream = context.getContentResolver().openInputStream(uri);
+            InputStream inputStream = context.openFileInput("data.ttl");
             if (inputStream != null) {
                 return Rio.parse(inputStream, "", RDFFormat.TURTLESTAR);
+            }else{
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
