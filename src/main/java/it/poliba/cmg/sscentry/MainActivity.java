@@ -1,23 +1,19 @@
 package it.poliba.cmg.sscentry;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.eclipse.rdf4j.model.Model;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityResultLauncher<Intent> createDocumentLauncher;
-    private ActivityResultLauncher<Intent> openDocumentLauncher;
     public static Model model;
-    public static Uri uri;
+    private static final String FILE_NAME = "questionnaire.ttl";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,49 +22,20 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView);
 
-        // Initialize the ActivityResultLauncher for creating a document
-        createDocumentLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        uri = result.getData().getData();
-                        if (uri != null) {
-                            // Execute the RDF manager and get the result
-                            model = RDFManager.generateRDF();
-                            boolean saved = RDFManager.saveRDFToFile(uri, this);
-                            if (saved) {
-                                Toast.makeText(this, "RDF saved successfully", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(this, "Failed to save RDF", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    } else {
-                        Toast.makeText(this, "Permission denied to write to external storage", Toast.LENGTH_LONG).show();
-                    }
-                });
+        // Check if the file exists
+        if (fileExists()) {
+            // If the file exists, read the file
+            model = RDFManager.readRDFFromFile(new File(getFilesDir(), FILE_NAME), this);
+            if (model == null) {
+                Toast.makeText(this, "Failed to read RDF", Toast.LENGTH_LONG).show();
+                createAndSaveRDF();
+            }
+        } else {
+            // If the file does not exist, create a new file
+            createAndSaveRDF();
+        }
 
-        // Initialize the ActivityResultLauncher for opening a document
-        openDocumentLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        uri = result.getData().getData();
-                        if (uri != null) {
-                            model = RDFManager.readRDFFromFile(uri, this);
-                            if (model != null) {
-                                Toast.makeText(this, "RDF read successfully", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(this, "Failed to read RDF", Toast.LENGTH_LONG).show();
-                                requestCreateDocument();
-                            }
-                        }
-                    } else {
-                        Toast.makeText(this, "Permission denied to read from external storage", Toast.LENGTH_LONG).show();
-                    }
-                });
-
-        requestOpenDocument();
-
+        // Your answers logic
         String ans1 = "1";
         String ans2 = "0";
         String ans3 = "1";
@@ -110,20 +77,18 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(RDFManager.printModel(model));
     }
 
-    private void requestCreateDocument() {
-        // Prepare the intent for creating a document
-        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("text/turtle");
-        intent.putExtra(Intent.EXTRA_TITLE, "questionnaire.ttl");
-        createDocumentLauncher.launch(intent);
-    }
-    private void requestOpenDocument() {
-        // Prepare the intent for opening a document
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("text/turtle");
-        openDocumentLauncher.launch(intent);
+    private boolean fileExists() {
+        File file = new File(getFilesDir(), FILE_NAME);
+        return file.exists();
     }
 
+    private void createAndSaveRDF() {
+        model = RDFManager.generateRDF();
+        boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
+        if (saved) {
+            Toast.makeText(this, "RDF saved successfully", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Failed to save RDF", Toast.LENGTH_LONG).show();
+        }
+    }
 }

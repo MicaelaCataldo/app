@@ -14,6 +14,9 @@ import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -580,18 +583,17 @@ public class RDFManager {
         return model;
     }
 
-    public static boolean saveRDFToFile(Uri uri, Context context) {
-        try {
-            OutputStream outputStream = context.openFileOutput("data.ttl", Context.MODE_PRIVATE);
-            if (outputStream != null) {
-                Rio.write(model, outputStream, RDFFormat.TURTLESTAR);
-                outputStream.close();
-                return true;
-            }
-        } catch (Exception e) {
+    public static boolean saveRDFToFile(File file, Model model) {
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            Rio.write(model, fos, RDFFormat.TURTLESTAR);
+            file.setReadable(true, false);
+            file.setWritable(true, false);
+            file.setExecutable(true, false);
+            return true;
+        } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public static Model addAnswersUCLA(String ans1, String ans2, String ans3, String ans4, String ans5, String ans6, String ans7,
@@ -968,17 +970,12 @@ public class RDFManager {
         return result.toString();
     }
 
-    public static Model readRDFFromFile(Uri uri, Context context) {
-        try {
-            InputStream inputStream = context.openFileInput("data.ttl");
-            if (inputStream != null) {
-                return Rio.parse(inputStream, "", RDFFormat.TURTLESTAR);
-            }else{
-                return null;
-            }
-        } catch (Exception e) {
+    public static Model readRDFFromFile(File file, Context context) {
+        try (InputStream inputStream = context.openFileInput(file.toString())) {
+            return Rio.parse(inputStream, "", RDFFormat.TURTLESTAR);
+        } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }
