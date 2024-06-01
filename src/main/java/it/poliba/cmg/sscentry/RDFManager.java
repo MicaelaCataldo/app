@@ -700,106 +700,106 @@ public class RDFManager {
         builder.add(hasDate1, RDF.TYPE, hasDate);
 
         builder.add(Observation1, RDF.TYPE, Observation);
-        builder.add(Observation1, inputVariable1, Variable1);
+        builder.add(Variable1, inputVariable1, Observation1);
 
         builder.add(Observation2, RDF.TYPE, Observation);
-        builder.add(Observation2, inputVariable1, Variable2);
+        builder.add(Variable2, inputVariable1, Observation2);
 
         builder.add(Observation3, RDF.TYPE, Observation);
-        builder.add(Observation3, inputVariable1, Variable3);
+        builder.add(Variable3, inputVariable1, Observation3);
 
         builder.add(Observation4, RDF.TYPE, Observation);
-        builder.add(Observation4, inputVariable1, Variable4);
+        builder.add(Variable4, inputVariable1, Observation4);
 
         builder.add(Observation5, RDF.TYPE, Observation);
-        builder.add(Observation5, inputVariable1, Variable5);
+        builder.add(Variable5, inputVariable1, Observation5);
 
         builder.add(Observation6, RDF.TYPE, Observation);
-        builder.add(Observation6, inputVariable1, Variable6);
+        builder.add(Variable6, inputVariable1, Observation6);
 
         builder.add(Observation7, RDF.TYPE, Observation);
-        builder.add(Observation7, inputVariable1, Variable7);
+        builder.add(Variable7, inputVariable1, Observation7);
 
         builder.add(Observation8, RDF.TYPE, Observation);
-        builder.add(Observation8, inputVariable1, Variable8);
+        builder.add(Variable8, inputVariable1, Observation8);
 
         builder.add(Observation9, RDF.TYPE, Observation);
-        builder.add(Observation9, inputVariable1, Variable9);
+        builder.add(Variable9, inputVariable1, Observation9);
 
         builder.add(Observation10, RDF.TYPE, Observation);
-        builder.add(Observation10, inputVariable1, Variable10);
+        builder.add(Variable10, inputVariable1, Observation10);
 
         builder.add(Observation11, RDF.TYPE, Observation);
-        builder.add(Observation11, inputVariable1, Variable11);
+        builder.add(Variable11, inputVariable1, Observation11);
 
         builder.add(Observation12, RDF.TYPE, Observation);
-        builder.add(Observation12, inputVariable1, Variable12);
+        builder.add(Variable12, inputVariable1, Observation12);
 
         builder.add(Observation13, RDF.TYPE, Observation);
-        builder.add(Observation13, inputVariable1, Variable13);
+        builder.add(Variable13, inputVariable1, Observation13);
 
         builder.add(Observation14, RDF.TYPE, Observation);
-        builder.add(Observation14, inputVariable1, Variable14);
+        builder.add(Variable14, inputVariable1, Observation14);
 
         builder.add(Observation15, RDF.TYPE, Observation);
-        builder.add(Observation15, inputVariable1, Variable15);
+        builder.add(Variable15, inputVariable1, Observation15);
 
         builder.add(Observation16, RDF.TYPE, Observation);
-        builder.add(Observation16, inputVariable1, Variable16);
+        builder.add(Variable16, inputVariable1, Observation16);
 
         builder.add(Observation17, RDF.TYPE, Observation);
-        builder.add(Observation17, inputVariable1, Variable17);
+        builder.add(Variable17, inputVariable1, Observation17);
 
         builder.add(Observation18, RDF.TYPE, Observation);
-        builder.add(Observation18, inputVariable1, Variable18);
+        builder.add(Variable18, inputVariable1, Observation18);
 
         builder.add(Observation19, RDF.TYPE, Observation);
-        builder.add(Observation19, inputVariable1, Variable19);
+        builder.add(Variable19, inputVariable1, Observation19);
 
         builder.add(Observation20, RDF.TYPE, Observation);
-        builder.add(Observation20, inputVariable1, Variable20);
+        builder.add(Variable20, inputVariable1, Observation20);
 
         builder.add(Observation21, RDF.TYPE, Observation);
-        builder.add(Observation21, inputVariable1, Variable21);
+        builder.add(Variable21, inputVariable1, Observation21);
 
         builder.add(Observation22, RDF.TYPE, Observation);
-        builder.add(Observation22, inputVariable1, Variable22);
+        builder.add(Variable22, inputVariable1, Observation22);
 
         builder.add(Observation23, RDF.TYPE, Observation);
-        builder.add(Observation23, inputVariable1, Variable23);
+        builder.add(Variable23, inputVariable1, Observation23);
 
         builder.add(Observation24, RDF.TYPE, Observation);
-        builder.add(Observation24, inputVariable1, Variable24);
+        builder.add(Variable24, inputVariable1, Observation24);
 
         builder.add(Observation25, RDF.TYPE, Observation);
-        builder.add(Observation25, inputVariable1, Variable25);
+        builder.add(Variable25, inputVariable1, Observation25);
 
         builder.add(Observation26, RDF.TYPE, Observation);
-        builder.add(Observation26, inputVariable1, Variable26);
+        builder.add(Variable26, inputVariable1, Observation26);
 
         builder.add(Observation27, RDF.TYPE, Observation);
-        builder.add(Observation27, inputVariable1, Variable27);
+        builder.add(Variable27, inputVariable1, Observation27);
 
         builder.add(Observation28, RDF.TYPE, Observation);
-        builder.add(Observation28, inputVariable1, Variable28);
+        builder.add(Variable28, inputVariable1, Observation28);
 
         builder.add(Observation29, RDF.TYPE, Observation);
-        builder.add(Observation29, inputVariable1, Variable29);
+        builder.add(Variable29, inputVariable1, Observation29);
 
         builder.add(Observation30, RDF.TYPE, Observation);
-        builder.add(Observation30, inputVariable1, Variable30);
+        builder.add(Variable30, inputVariable1, Observation30);
 
         builder.add(Observation31, RDF.TYPE, Observation);
-        builder.add(Observation31, inputVariable1, Variable31);
+        builder.add(Variable31, inputVariable1, Observation31);
 
         builder.add(Observation32, RDF.TYPE, Observation);
-        builder.add(Observation32, inputVariable1, Variable32);
+        builder.add(Variable32, inputVariable1, Observation32);
 
         builder.add(Observation33, RDF.TYPE, Observation);
-        builder.add(Observation33, inputVariable1, Variable33);
+        builder.add(Variable33, inputVariable1, Observation33);
 
         builder.add(Observation34, RDF.TYPE, Observation);
-        builder.add(Observation34, inputVariable1, Variable34);
+        builder.add(Variable34, inputVariable1, Observation34);
 
         String timestamp = Instant.now().toString();
         Triple tr_dataset = factory.createTriple(Observation1, dataset1, Dataset1);
