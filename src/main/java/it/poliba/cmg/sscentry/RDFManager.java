@@ -646,40 +646,40 @@ public class RDFManager {
         IRI inputVariable = factory.createIRI(qb, "inputVariable");
         IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
 
-        IRI Observation1 = factory.createIRI(cmg_vocabulary, "Observation1");
-        IRI Observation2 = factory.createIRI(cmg_vocabulary, "Observation2");
-        IRI Observation3 = factory.createIRI(cmg_vocabulary, "Observation3");
-        IRI Observation4 = factory.createIRI(cmg_vocabulary, "Observation4");
-        IRI Observation5 = factory.createIRI(cmg_vocabulary, "Observation5");
-        IRI Observation6 = factory.createIRI(cmg_vocabulary, "Observation6");
-        IRI Observation7 = factory.createIRI(cmg_vocabulary, "Observation7");
-        IRI Observation8 = factory.createIRI(cmg_vocabulary, "Observation8");
-        IRI Observation9 = factory.createIRI(cmg_vocabulary, "Observation9");
-        IRI Observation10 = factory.createIRI(cmg_vocabulary, "Observation10");
-        IRI Observation11 = factory.createIRI(cmg_vocabulary, "Observation11");
-        IRI Observation12 = factory.createIRI(cmg_vocabulary, "Observation12");
-        IRI Observation13 = factory.createIRI(cmg_vocabulary, "Observation13");
-        IRI Observation14 = factory.createIRI(cmg_vocabulary, "Observation14");
-        IRI Observation15 = factory.createIRI(cmg_vocabulary, "Observation15");
-        IRI Observation16 = factory.createIRI(cmg_vocabulary, "Observation16");
-        IRI Observation17 = factory.createIRI(cmg_vocabulary, "Observation17");
-        IRI Observation18 = factory.createIRI(cmg_vocabulary, "Observation18");
-        IRI Observation19 = factory.createIRI(cmg_vocabulary, "Observation19");
-        IRI Observation20 = factory.createIRI(cmg_vocabulary, "Observation20");
-        IRI Observation21 = factory.createIRI(cmg_vocabulary, "Observation21");
-        IRI Observation22 = factory.createIRI(cmg_vocabulary, "Observation22");
-        IRI Observation23 = factory.createIRI(cmg_vocabulary, "Observation23");
-        IRI Observation24 = factory.createIRI(cmg_vocabulary, "Observation24");
-        IRI Observation25 = factory.createIRI(cmg_vocabulary, "Observation25");
-        IRI Observation26 = factory.createIRI(cmg_vocabulary, "Observation26");
-        IRI Observation27 = factory.createIRI(cmg_vocabulary, "Observation27");
-        IRI Observation28 = factory.createIRI(cmg_vocabulary, "Observation28");
-        IRI Observation29 = factory.createIRI(cmg_vocabulary, "Observation29");
-        IRI Observation30 = factory.createIRI(cmg_vocabulary, "Observation30");
-        IRI Observation31 = factory.createIRI(cmg_vocabulary, "Observation31");
-        IRI Observation32 = factory.createIRI(cmg_vocabulary, "Observation32");
-        IRI Observation33 = factory.createIRI(cmg_vocabulary, "Observation33");
-        IRI Observation34 = factory.createIRI(cmg_vocabulary, "Observation34");
+        IRI Observation1 = factory.createIRI(cmg_vocabulary, ans1);
+        IRI Observation2 = factory.createIRI(cmg_vocabulary, ans2);
+        IRI Observation3 = factory.createIRI(cmg_vocabulary, ans3);
+        IRI Observation4 = factory.createIRI(cmg_vocabulary, ans4);
+        IRI Observation5 = factory.createIRI(cmg_vocabulary, ans5);
+        IRI Observation6 = factory.createIRI(cmg_vocabulary, ans6);
+        IRI Observation7 = factory.createIRI(cmg_vocabulary, ans7);
+        IRI Observation8 = factory.createIRI(cmg_vocabulary, ans8);
+        IRI Observation9 = factory.createIRI(cmg_vocabulary, ans9);
+        IRI Observation10 = factory.createIRI(cmg_vocabulary, ans10);
+        IRI Observation11 = factory.createIRI(cmg_vocabulary, ans11);
+        IRI Observation12 = factory.createIRI(cmg_vocabulary, ans12);
+        IRI Observation13 = factory.createIRI(cmg_vocabulary, ans13);
+        IRI Observation14 = factory.createIRI(cmg_vocabulary, ans14);
+        IRI Observation15 = factory.createIRI(cmg_vocabulary, ans15);
+        IRI Observation16 = factory.createIRI(cmg_vocabulary, ans16);
+        IRI Observation17 = factory.createIRI(cmg_vocabulary, ans17);
+        IRI Observation18 = factory.createIRI(cmg_vocabulary, ans18);
+        IRI Observation19 = factory.createIRI(cmg_vocabulary, ans19);
+        IRI Observation20 = factory.createIRI(cmg_vocabulary, ans20);
+        IRI Observation21 = factory.createIRI(cmg_vocabulary, ans21);
+        IRI Observation22 = factory.createIRI(cmg_vocabulary, ans22);
+        IRI Observation23 = factory.createIRI(cmg_vocabulary, ans23);
+        IRI Observation24 = factory.createIRI(cmg_vocabulary, ans24);
+        IRI Observation25 = factory.createIRI(cmg_vocabulary, ans25);
+        IRI Observation26 = factory.createIRI(cmg_vocabulary, ans26);
+        IRI Observation27 = factory.createIRI(cmg_vocabulary, ans27);
+        IRI Observation28 = factory.createIRI(cmg_vocabulary, ans28);
+        IRI Observation29 = factory.createIRI(cmg_vocabulary, ans29);
+        IRI Observation30 = factory.createIRI(cmg_vocabulary, ans30);
+        IRI Observation31 = factory.createIRI(cmg_vocabulary, ans31);
+        IRI Observation32 = factory.createIRI(cmg_vocabulary, ans32);
+        IRI Observation33 = factory.createIRI(cmg_vocabulary, ans33);
+        IRI Observation34 = factory.createIRI(cmg_vocabulary, ans34);
 
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset1");
         IRI LogicalDataset1 = factory.createIRI(cmg_vocabulary, "LogicalDataset1");
@@ -695,107 +695,111 @@ public class RDFManager {
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
         builder.add(LogicalDataset, instrument1, QuestionnaireUCLA);
 
+        builder.add(inputVariable1, RDF.TYPE, inputVariable);
+
+        builder.add(hasDate1, RDF.TYPE, hasDate);
+
         builder.add(Observation1, RDF.TYPE, Observation);
-        builder.add(Observation1, inputVariable, Variable1);
+        builder.add(Observation1, inputVariable1, Variable1);
 
         builder.add(Observation2, RDF.TYPE, Observation);
-        builder.add(Observation2, inputVariable, Variable2);
+        builder.add(Observation2, inputVariable1, Variable2);
 
         builder.add(Observation3, RDF.TYPE, Observation);
-        builder.add(Observation3, inputVariable, Variable3);
+        builder.add(Observation3, inputVariable1, Variable3);
 
         builder.add(Observation4, RDF.TYPE, Observation);
-        builder.add(Observation4, inputVariable, Variable4);
+        builder.add(Observation4, inputVariable1, Variable4);
 
         builder.add(Observation5, RDF.TYPE, Observation);
-        builder.add(Observation5, inputVariable, Variable5);
+        builder.add(Observation5, inputVariable1, Variable5);
 
         builder.add(Observation6, RDF.TYPE, Observation);
-        builder.add(Observation6, inputVariable, Variable6);
+        builder.add(Observation6, inputVariable1, Variable6);
 
         builder.add(Observation7, RDF.TYPE, Observation);
-        builder.add(Observation7, inputVariable, Variable7);
+        builder.add(Observation7, inputVariable1, Variable7);
 
         builder.add(Observation8, RDF.TYPE, Observation);
-        builder.add(Observation8, inputVariable, Variable8);
+        builder.add(Observation8, inputVariable1, Variable8);
 
         builder.add(Observation9, RDF.TYPE, Observation);
-        builder.add(Observation9, inputVariable, Variable9);
+        builder.add(Observation9, inputVariable1, Variable9);
 
         builder.add(Observation10, RDF.TYPE, Observation);
-        builder.add(Observation10, inputVariable, Variable10);
+        builder.add(Observation10, inputVariable1, Variable10);
 
         builder.add(Observation11, RDF.TYPE, Observation);
-        builder.add(Observation11, inputVariable, Variable11);
+        builder.add(Observation11, inputVariable1, Variable11);
 
         builder.add(Observation12, RDF.TYPE, Observation);
-        builder.add(Observation12, inputVariable, Variable12);
+        builder.add(Observation12, inputVariable1, Variable12);
 
         builder.add(Observation13, RDF.TYPE, Observation);
-        builder.add(Observation13, inputVariable, Variable13);
+        builder.add(Observation13, inputVariable1, Variable13);
 
         builder.add(Observation14, RDF.TYPE, Observation);
-        builder.add(Observation14, inputVariable, Variable14);
+        builder.add(Observation14, inputVariable1, Variable14);
 
         builder.add(Observation15, RDF.TYPE, Observation);
-        builder.add(Observation15, inputVariable, Variable15);
+        builder.add(Observation15, inputVariable1, Variable15);
 
         builder.add(Observation16, RDF.TYPE, Observation);
-        builder.add(Observation16, inputVariable, Variable16);
+        builder.add(Observation16, inputVariable1, Variable16);
 
         builder.add(Observation17, RDF.TYPE, Observation);
-        builder.add(Observation17, inputVariable, Variable17);
+        builder.add(Observation17, inputVariable1, Variable17);
 
         builder.add(Observation18, RDF.TYPE, Observation);
-        builder.add(Observation18, inputVariable, Variable18);
+        builder.add(Observation18, inputVariable1, Variable18);
 
         builder.add(Observation19, RDF.TYPE, Observation);
-        builder.add(Observation19, inputVariable, Variable19);
+        builder.add(Observation19, inputVariable1, Variable19);
 
         builder.add(Observation20, RDF.TYPE, Observation);
-        builder.add(Observation20, inputVariable, Variable20);
+        builder.add(Observation20, inputVariable1, Variable20);
 
         builder.add(Observation21, RDF.TYPE, Observation);
-        builder.add(Observation21, inputVariable, Variable21);
+        builder.add(Observation21, inputVariable1, Variable21);
 
         builder.add(Observation22, RDF.TYPE, Observation);
-        builder.add(Observation22, inputVariable, Variable22);
+        builder.add(Observation22, inputVariable1, Variable22);
 
         builder.add(Observation23, RDF.TYPE, Observation);
-        builder.add(Observation23, inputVariable, Variable23);
+        builder.add(Observation23, inputVariable1, Variable23);
 
         builder.add(Observation24, RDF.TYPE, Observation);
-        builder.add(Observation24, inputVariable, Variable24);
+        builder.add(Observation24, inputVariable1, Variable24);
 
         builder.add(Observation25, RDF.TYPE, Observation);
-        builder.add(Observation25, inputVariable, Variable25);
+        builder.add(Observation25, inputVariable1, Variable25);
 
         builder.add(Observation26, RDF.TYPE, Observation);
-        builder.add(Observation26, inputVariable, Variable26);
+        builder.add(Observation26, inputVariable1, Variable26);
 
         builder.add(Observation27, RDF.TYPE, Observation);
-        builder.add(Observation27, inputVariable, Variable27);
+        builder.add(Observation27, inputVariable1, Variable27);
 
         builder.add(Observation28, RDF.TYPE, Observation);
-        builder.add(Observation28, inputVariable, Variable28);
+        builder.add(Observation28, inputVariable1, Variable28);
 
         builder.add(Observation29, RDF.TYPE, Observation);
-        builder.add(Observation29, inputVariable, Variable29);
+        builder.add(Observation29, inputVariable1, Variable29);
 
         builder.add(Observation30, RDF.TYPE, Observation);
-        builder.add(Observation30, inputVariable, Variable30);
+        builder.add(Observation30, inputVariable1, Variable30);
 
         builder.add(Observation31, RDF.TYPE, Observation);
-        builder.add(Observation31, inputVariable, Variable31);
+        builder.add(Observation31, inputVariable1, Variable31);
 
         builder.add(Observation32, RDF.TYPE, Observation);
-        builder.add(Observation32, inputVariable, Variable32);
+        builder.add(Observation32, inputVariable1, Variable32);
 
         builder.add(Observation33, RDF.TYPE, Observation);
-        builder.add(Observation33, inputVariable, Variable33);
+        builder.add(Observation33, inputVariable1, Variable33);
 
         builder.add(Observation34, RDF.TYPE, Observation);
-        builder.add(Observation34, inputVariable, Variable34);
+        builder.add(Observation34, inputVariable1, Variable34);
 
         String timestamp = Instant.now().toString();
         Triple tr_dataset = factory.createTriple(Observation1, dataset1, Dataset1);
