@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.eclipse.rdf4j.model.Model;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,43 +32,47 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 textView.setText(RDFManager.printModel(model));
                 // Your answers logic
-                String ans1 = "1";
-                String ans2 = "0";
-                String ans3 = "1";
-                String ans4 = "0";
-                String ans5 = "1";
-                String ans6 = "0";
-                String ans7 = "1";
-                String ans8 = "0";
-                String ans9 = "1";
-                String ans10 = "0";
-                String ans11 = "1";
-                String ans12 = "0";
-                String ans13 = "1";
-                String ans14 = "0";
-                String ans15 = "1";
-                String ans16 = "0";
-                String ans17 = "1";
-                String ans18 = "0";
-                String ans19 = "1";
-                String ans20 = "0";
-                String ans21 = "1";
-                String ans22 = "0";
-                String ans23 = "1";
-                String ans24 = "0";
-                String ans25 = "1";
-                String ans26 = "0";
-                String ans27 = "1";
-                String ans28 = "0";
-                String ans29 = "1";
-                String ans30 = "0";
-                String ans31 = "1";
-                String ans32 = "0";
-                String ans33 = "1";
-                String ans34 = "0";
-                model = RDFManager.addAnswersUCLA(ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12,
-                        ans13, ans14, ans15, ans16, ans17, ans18, ans19, ans20, ans21, ans22, ans23, ans24, ans25, ans26,
-                        ans27, ans28, ans29, ans30, ans31, ans32, ans33, ans34, model);
+
+                HashMap<String, String> map = new HashMap<>();
+
+
+
+                map.put("ans1", "1");
+                map.put("ans2", "0");
+                map.put("ans3", "1");
+                map.put("ans4", "1");
+                map.put("ans5", "0");
+                map.put("ans6", "1");
+                map.put("ans7", "2");
+                map.put("ans8", "1");
+                map.put("ans9", "1");
+                map.put("ans10", "3");
+                map.put("ans11", "1");
+                map.put("ans12", "1");
+                map.put("ans13", "0");
+                map.put("ans14", "2");
+                map.put("ans15", "1");
+                map.put("ans16", "1");
+                map.put("ans17", "3");
+                map.put("ans18", "1");
+                map.put("ans19", "1");
+                map.put("ans20", "1");
+                map.put("ans21", "0");
+                map.put("ans22", "1");
+                map.put("ans23", "3");
+                map.put("ans24", "2");
+                map.put("ans25", "1");
+                map.put("ans26", "1");
+                map.put("ans27", "0");
+                map.put("ans28", "1");
+                map.put("ans29", "0");
+                map.put("ans30", "1");
+                map.put("ans31", "1");
+                map.put("ans32", "0");
+                map.put("ans33", "1");
+                map.put("ans34", "0");
+
+                model = RDFManager.addAnswersUCLA(map, model);
                 Toast.makeText(this, "Model updated successfully", Toast.LENGTH_LONG).show();
                 textView.setText(RDFManager.printModel(model));
                 boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);

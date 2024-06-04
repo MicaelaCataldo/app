@@ -1,8 +1,5 @@
 package it.poliba.cmg.sscentry;
 
-import android.content.Context;
-import android.net.Uri;
-
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Triple;
@@ -18,9 +15,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.time.Instant;
+import java.util.HashMap;
 
 public class RDFManager {
     // Define the namespace
@@ -596,11 +592,7 @@ public class RDFManager {
         }
     }
 
-    public static Model addAnswersUCLA(String ans1, String ans2, String ans3, String ans4, String ans5, String ans6, String ans7,
-                                        String ans8, String ans9, String ans10, String ans11, String ans12, String ans13, String ans14,
-                                        String ans15, String ans16, String ans17, String ans18, String ans19, String ans20, String ans21,
-                                        String ans22, String ans23, String ans24, String ans25, String ans26, String ans27, String ans28,
-                                        String ans29, String ans30, String ans31, String ans32, String ans33, String ans34, Model model){
+    public static Model addAnswersUCLA(HashMap<String, String> map, Model model){
 
         IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
         IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
@@ -646,40 +638,40 @@ public class RDFManager {
         IRI inputVariable = factory.createIRI(qb, "inputVariable");
         IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
 
-        IRI Observation1 = factory.createIRI(cmg_vocabulary, ans1);
-        IRI Observation2 = factory.createIRI(cmg_vocabulary, ans2);
-        IRI Observation3 = factory.createIRI(cmg_vocabulary, ans3);
-        IRI Observation4 = factory.createIRI(cmg_vocabulary, ans4);
-        IRI Observation5 = factory.createIRI(cmg_vocabulary, ans5);
-        IRI Observation6 = factory.createIRI(cmg_vocabulary, ans6);
-        IRI Observation7 = factory.createIRI(cmg_vocabulary, ans7);
-        IRI Observation8 = factory.createIRI(cmg_vocabulary, ans8);
-        IRI Observation9 = factory.createIRI(cmg_vocabulary, ans9);
-        IRI Observation10 = factory.createIRI(cmg_vocabulary, ans10);
-        IRI Observation11 = factory.createIRI(cmg_vocabulary, ans11);
-        IRI Observation12 = factory.createIRI(cmg_vocabulary, ans12);
-        IRI Observation13 = factory.createIRI(cmg_vocabulary, ans13);
-        IRI Observation14 = factory.createIRI(cmg_vocabulary, ans14);
-        IRI Observation15 = factory.createIRI(cmg_vocabulary, ans15);
-        IRI Observation16 = factory.createIRI(cmg_vocabulary, ans16);
-        IRI Observation17 = factory.createIRI(cmg_vocabulary, ans17);
-        IRI Observation18 = factory.createIRI(cmg_vocabulary, ans18);
-        IRI Observation19 = factory.createIRI(cmg_vocabulary, ans19);
-        IRI Observation20 = factory.createIRI(cmg_vocabulary, ans20);
-        IRI Observation21 = factory.createIRI(cmg_vocabulary, ans21);
-        IRI Observation22 = factory.createIRI(cmg_vocabulary, ans22);
-        IRI Observation23 = factory.createIRI(cmg_vocabulary, ans23);
-        IRI Observation24 = factory.createIRI(cmg_vocabulary, ans24);
-        IRI Observation25 = factory.createIRI(cmg_vocabulary, ans25);
-        IRI Observation26 = factory.createIRI(cmg_vocabulary, ans26);
-        IRI Observation27 = factory.createIRI(cmg_vocabulary, ans27);
-        IRI Observation28 = factory.createIRI(cmg_vocabulary, ans28);
-        IRI Observation29 = factory.createIRI(cmg_vocabulary, ans29);
-        IRI Observation30 = factory.createIRI(cmg_vocabulary, ans30);
-        IRI Observation31 = factory.createIRI(cmg_vocabulary, ans31);
-        IRI Observation32 = factory.createIRI(cmg_vocabulary, ans32);
-        IRI Observation33 = factory.createIRI(cmg_vocabulary, ans33);
-        IRI Observation34 = factory.createIRI(cmg_vocabulary, ans34);
+        IRI Observation1 = factory.createIRI(cmg_vocabulary, map.get("ans1"));
+        IRI Observation2 = factory.createIRI(cmg_vocabulary, map.get("ans2"));
+        IRI Observation3 = factory.createIRI(cmg_vocabulary, map.get("ans3"));
+        IRI Observation4 = factory.createIRI(cmg_vocabulary, map.get("ans4"));
+        IRI Observation5 = factory.createIRI(cmg_vocabulary, map.get("ans5"));
+        IRI Observation6 = factory.createIRI(cmg_vocabulary, map.get("ans6"));
+        IRI Observation7 = factory.createIRI(cmg_vocabulary, map.get("ans7"));
+        IRI Observation8 = factory.createIRI(cmg_vocabulary, map.get("ans8"));
+        IRI Observation9 = factory.createIRI(cmg_vocabulary, map.get("ans9"));
+        IRI Observation10 = factory.createIRI(cmg_vocabulary, map.get("ans10"));
+        IRI Observation11 = factory.createIRI(cmg_vocabulary, map.get("ans11"));
+        IRI Observation12 = factory.createIRI(cmg_vocabulary, map.get("ans12"));
+        IRI Observation13 = factory.createIRI(cmg_vocabulary, map.get("ans13"));
+        IRI Observation14 = factory.createIRI(cmg_vocabulary, map.get("ans14"));
+        IRI Observation15 = factory.createIRI(cmg_vocabulary, map.get("ans15"));
+        IRI Observation16 = factory.createIRI(cmg_vocabulary, map.get("ans16"));
+        IRI Observation17 = factory.createIRI(cmg_vocabulary, map.get("ans17"));
+        IRI Observation18 = factory.createIRI(cmg_vocabulary, map.get("ans18"));
+        IRI Observation19 = factory.createIRI(cmg_vocabulary, map.get("ans19"));
+        IRI Observation20 = factory.createIRI(cmg_vocabulary, map.get("ans20"));
+        IRI Observation21 = factory.createIRI(cmg_vocabulary, map.get("ans21"));
+        IRI Observation22 = factory.createIRI(cmg_vocabulary, map.get("ans22"));
+        IRI Observation23 = factory.createIRI(cmg_vocabulary, map.get("ans23"));
+        IRI Observation24 = factory.createIRI(cmg_vocabulary, map.get("ans24"));
+        IRI Observation25 = factory.createIRI(cmg_vocabulary, map.get("ans25"));
+        IRI Observation26 = factory.createIRI(cmg_vocabulary, map.get("ans26"));
+        IRI Observation27 = factory.createIRI(cmg_vocabulary, map.get("ans27"));
+        IRI Observation28 = factory.createIRI(cmg_vocabulary, map.get("ans28"));
+        IRI Observation29 = factory.createIRI(cmg_vocabulary, map.get("ans29"));
+        IRI Observation30 = factory.createIRI(cmg_vocabulary, map.get("ans30"));
+        IRI Observation31 = factory.createIRI(cmg_vocabulary, map.get("ans31"));
+        IRI Observation32 = factory.createIRI(cmg_vocabulary, map.get("ans32"));
+        IRI Observation33 = factory.createIRI(cmg_vocabulary, map.get("ans33"));
+        IRI Observation34 = factory.createIRI(cmg_vocabulary, map.get("ans34"));
 
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset1");
         IRI LogicalDataset1 = factory.createIRI(cmg_vocabulary, "LogicalDataset1");
@@ -949,13 +941,6 @@ public class RDFManager {
         model = builder.build();
 
         return model;
-    }
-
-    public static Model openRDFgraph() throws IOException {
-        InputStream inputStream = RDFManager.class.getResourceAsStream("/" + filename);
-        Model model = Rio.parse(inputStream, "", RDFFormat.TURTLESTAR);
-
-       return model;
     }
 
     public static String printModel(Model model){
