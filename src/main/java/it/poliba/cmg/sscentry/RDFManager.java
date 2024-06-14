@@ -29,6 +29,8 @@ public class RDFManager {
     public static ValueFactory factory = SimpleValueFactory.getInstance();
     private static Model model;
 
+    // Funzione per generare tutte le strutture vuote, ossia solo domande e possibili risposte, dei questionari
+    // (al momento è stato implementato solo UCLA)
     public static Model generateRDF() {
        Model result = questionnaireUCLADefinition();
        return result;
@@ -37,7 +39,7 @@ public class RDFManager {
     public static Model questionnaireUCLADefinition(){
         StringBuilder result = new StringBuilder();
 
-        // Create the generic classes that will be instanciated as subjects and objects
+        // Create the generic classes that will be instanced as subjects and objects
         IRI Study = factory.createIRI(disco, "Study");
         IRI Questionnaire = factory.createIRI(disco, "Questionnaire");
         IRI Question = factory.createIRI(disco, "Question");
@@ -47,7 +49,7 @@ public class RDFManager {
         IRI Concept = factory.createIRI(disco, "Concept");
         IRI RepresentedVariable = factory.createIRI(disco, "RepresentedVariable");
 
-        // Create the generic classes that will be instanciated as relationships (predicates)
+        // Create the generic classes that will be instanced as relationships (predicates)
         IRI question = factory.createIRI(disco, "question");
         IRI questionText = factory.createIRI(disco, "questionText");
         IRI hasTopConcept = factory.createIRI(disco, "hasTopConcept");
@@ -579,6 +581,7 @@ public class RDFManager {
         return model;
     }
 
+    // Funzione che genera il file RDF corrispondente a un certo modello
     public static boolean saveRDFToFile(File file, Model model) {
         try (FileOutputStream fos = new FileOutputStream(file)) {
             Rio.write(model, fos, RDFFormat.TURTLESTAR);
@@ -592,8 +595,8 @@ public class RDFManager {
         }
     }
 
+    // Funzione che aggiunge al modello le risposte fornite in una nuova compilazione del questionario
     public static Model addAnswersUCLA(HashMap<String, String> map, Model model){
-
         IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
         IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
         IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
@@ -943,6 +946,7 @@ public class RDFManager {
         return model;
     }
 
+    // Funzione che ritorna l'intero modello come stringa
     public static String printModel(Model model){
         StringBuilder result = new StringBuilder();
         model.forEach(statement -> {

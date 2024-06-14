@@ -31,12 +31,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Failed to read RDF", Toast.LENGTH_LONG).show();
             }else{
                 textView.setText(RDFManager.printModel(model));
-                // Your answers logic
-
+                // Answers simulation. La seguente hasmap contiene una simulazione delle risposte inserite dal paziente in una compilazione del questionario
                 HashMap<String, String> map = new HashMap<>();
-
-
-
                 map.put("ans1", "1");
                 map.put("ans2", "0");
                 map.put("ans3", "1");
