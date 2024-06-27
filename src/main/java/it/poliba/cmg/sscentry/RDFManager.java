@@ -15,8 +15,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class RDFManager {
     // Define the namespace
@@ -174,9 +175,9 @@ public class RDFManager {
         IRI ConceptScheme2 = factory.createIRI(cmg_vocabulary, "ConceptScheme2");
 
         IRI Concept1 = factory.createIRI(cmg_vocabulary, "No Days");
-        IRI Concept2 = factory.createIRI(cmg_vocabulary, "1-2 Days");
-        IRI Concept3 = factory.createIRI(cmg_vocabulary, "3-4 Days");
-        IRI Concept4 = factory.createIRI(cmg_vocabulary, "5-7 Days");
+        IRI Concept2 = factory.createIRI(cmg_vocabulary, "1-2_Days");
+        IRI Concept3 = factory.createIRI(cmg_vocabulary, "3-4_Days");
+        IRI Concept4 = factory.createIRI(cmg_vocabulary, "5-7_Days");
         IRI Concept5 = factory.createIRI(cmg_vocabulary, "Yes");
         IRI Concept6 = factory.createIRI(cmg_vocabulary, "No");
 
@@ -639,47 +640,50 @@ public class RDFManager {
         IRI aggregation = factory.createIRI(disco, "aggregation");
         IRI dataset = factory.createIRI(qb, "dataset");
         IRI inputVariable = factory.createIRI(qb, "inputVariable");
-        IRI hasDate = factory.createIRI(cmg_vocabulary, "hasDate");
 
-        IRI Observation1 = factory.createIRI(cmg_vocabulary, map.get("ans1"));
-        IRI Observation2 = factory.createIRI(cmg_vocabulary, map.get("ans2"));
-        IRI Observation3 = factory.createIRI(cmg_vocabulary, map.get("ans3"));
-        IRI Observation4 = factory.createIRI(cmg_vocabulary, map.get("ans4"));
-        IRI Observation5 = factory.createIRI(cmg_vocabulary, map.get("ans5"));
-        IRI Observation6 = factory.createIRI(cmg_vocabulary, map.get("ans6"));
-        IRI Observation7 = factory.createIRI(cmg_vocabulary, map.get("ans7"));
-        IRI Observation8 = factory.createIRI(cmg_vocabulary, map.get("ans8"));
-        IRI Observation9 = factory.createIRI(cmg_vocabulary, map.get("ans9"));
-        IRI Observation10 = factory.createIRI(cmg_vocabulary, map.get("ans10"));
-        IRI Observation11 = factory.createIRI(cmg_vocabulary, map.get("ans11"));
-        IRI Observation12 = factory.createIRI(cmg_vocabulary, map.get("ans12"));
-        IRI Observation13 = factory.createIRI(cmg_vocabulary, map.get("ans13"));
-        IRI Observation14 = factory.createIRI(cmg_vocabulary, map.get("ans14"));
-        IRI Observation15 = factory.createIRI(cmg_vocabulary, map.get("ans15"));
-        IRI Observation16 = factory.createIRI(cmg_vocabulary, map.get("ans16"));
-        IRI Observation17 = factory.createIRI(cmg_vocabulary, map.get("ans17"));
-        IRI Observation18 = factory.createIRI(cmg_vocabulary, map.get("ans18"));
-        IRI Observation19 = factory.createIRI(cmg_vocabulary, map.get("ans19"));
-        IRI Observation20 = factory.createIRI(cmg_vocabulary, map.get("ans20"));
-        IRI Observation21 = factory.createIRI(cmg_vocabulary, map.get("ans21"));
-        IRI Observation22 = factory.createIRI(cmg_vocabulary, map.get("ans22"));
-        IRI Observation23 = factory.createIRI(cmg_vocabulary, map.get("ans23"));
-        IRI Observation24 = factory.createIRI(cmg_vocabulary, map.get("ans24"));
-        IRI Observation25 = factory.createIRI(cmg_vocabulary, map.get("ans25"));
-        IRI Observation26 = factory.createIRI(cmg_vocabulary, map.get("ans26"));
-        IRI Observation27 = factory.createIRI(cmg_vocabulary, map.get("ans27"));
-        IRI Observation28 = factory.createIRI(cmg_vocabulary, map.get("ans28"));
-        IRI Observation29 = factory.createIRI(cmg_vocabulary, map.get("ans29"));
-        IRI Observation30 = factory.createIRI(cmg_vocabulary, map.get("ans30"));
-        IRI Observation31 = factory.createIRI(cmg_vocabulary, map.get("ans31"));
-        IRI Observation32 = factory.createIRI(cmg_vocabulary, map.get("ans32"));
-        IRI Observation33 = factory.createIRI(cmg_vocabulary, map.get("ans33"));
-        IRI Observation34 = factory.createIRI(cmg_vocabulary, map.get("ans34"));
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
+        String timestamp = now.format(formatter);
 
-        IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset1");
+        IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
+
+        IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
+        IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
+        IRI Observation3 = factory.createIRI(cmg_vocabulary, timestamp+"_3_"+ map.get("ans3"));
+        IRI Observation4 = factory.createIRI(cmg_vocabulary, timestamp+"_4_"+ map.get("ans4"));
+        IRI Observation5 = factory.createIRI(cmg_vocabulary, timestamp+"_5_"+ map.get("ans5"));
+        IRI Observation6 = factory.createIRI(cmg_vocabulary, timestamp+"_6_"+ map.get("ans6"));
+        IRI Observation7 = factory.createIRI(cmg_vocabulary, timestamp+"_7_"+ map.get("ans7"));
+        IRI Observation8 = factory.createIRI(cmg_vocabulary, timestamp+"_8_"+ map.get("ans8"));
+        IRI Observation9 = factory.createIRI(cmg_vocabulary, timestamp+"_9_"+ map.get("ans9"));
+        IRI Observation10 = factory.createIRI(cmg_vocabulary, timestamp+"_10_"+ map.get("ans10"));
+        IRI Observation11 = factory.createIRI(cmg_vocabulary, timestamp+"_11_"+ map.get("ans11"));
+        IRI Observation12 = factory.createIRI(cmg_vocabulary, timestamp+"_12_"+ map.get("ans12"));
+        IRI Observation13 = factory.createIRI(cmg_vocabulary, timestamp+"_13_"+ map.get("ans13"));
+        IRI Observation14 = factory.createIRI(cmg_vocabulary, timestamp+"_14_"+ map.get("ans14"));
+        IRI Observation15 = factory.createIRI(cmg_vocabulary, timestamp+"_15_"+ map.get("ans15"));
+        IRI Observation16 = factory.createIRI(cmg_vocabulary, timestamp+"_16_"+ map.get("ans16"));
+        IRI Observation17 = factory.createIRI(cmg_vocabulary, timestamp+"_17_"+ map.get("ans17"));
+        IRI Observation18 = factory.createIRI(cmg_vocabulary, timestamp+"_18_"+ map.get("ans18"));
+        IRI Observation19 = factory.createIRI(cmg_vocabulary, timestamp+"_19_"+ map.get("ans19"));
+        IRI Observation20 = factory.createIRI(cmg_vocabulary, timestamp+"_20_"+ map.get("ans20"));
+        IRI Observation21 = factory.createIRI(cmg_vocabulary, timestamp+"_21_"+ map.get("ans21"));
+        IRI Observation22 = factory.createIRI(cmg_vocabulary, timestamp+"_22_"+ map.get("ans22"));
+        IRI Observation23 = factory.createIRI(cmg_vocabulary, timestamp+"_23_"+ map.get("ans23"));
+        IRI Observation24 = factory.createIRI(cmg_vocabulary, timestamp+"_24_"+ map.get("ans24"));
+        IRI Observation25 = factory.createIRI(cmg_vocabulary, timestamp+"_25_"+ map.get("ans25"));
+        IRI Observation26 = factory.createIRI(cmg_vocabulary, timestamp+"_26_"+ map.get("ans26"));
+        IRI Observation27 = factory.createIRI(cmg_vocabulary, timestamp+"_27_"+ map.get("ans27"));
+        IRI Observation28 = factory.createIRI(cmg_vocabulary, timestamp+"_28_"+ map.get("ans28"));
+        IRI Observation29 = factory.createIRI(cmg_vocabulary, timestamp+"_29_"+ map.get("ans29"));
+        IRI Observation30 = factory.createIRI(cmg_vocabulary, timestamp+"_30_"+ map.get("ans30"));
+        IRI Observation31 = factory.createIRI(cmg_vocabulary, timestamp+"_31_"+ map.get("ans31"));
+        IRI Observation32 = factory.createIRI(cmg_vocabulary, timestamp+"_32_"+ map.get("ans32"));
+        IRI Observation33 = factory.createIRI(cmg_vocabulary, timestamp+"_33_"+ map.get("ans33"));
+        IRI Observation34 = factory.createIRI(cmg_vocabulary, timestamp+"_34_"+ map.get("ans34"));
+
         IRI LogicalDataset1 = factory.createIRI(cmg_vocabulary, "LogicalDataset1");
-        IRI dataset1 = factory.createIRI(cmg_vocabulary, "dataset1");
-        IRI hasDate1 = factory.createIRI(cmg_vocabulary, "hasDate1");
+        IRI dataset1 = factory.createIRI(cmg_vocabulary, "dataset");
         IRI inputVariable1 = factory.createIRI(cmg_vocabulary, "inputVariable1");
         IRI aggregation1 = factory.createIRI(cmg_vocabulary, "aggregation1");
         IRI instrument1 = factory.createIRI(disco, "instrument1");
@@ -687,12 +691,11 @@ public class RDFManager {
         // Create the model builder
         ModelBuilder builder = new ModelBuilder(model);
 
+        builder.add(dataset1, RDF.TYPE, dataset);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
         builder.add(LogicalDataset, instrument1, QuestionnaireUCLA);
 
         builder.add(inputVariable1, RDF.TYPE, inputVariable);
-
-        builder.add(hasDate1, RDF.TYPE, hasDate);
 
         builder.add(Observation1, RDF.TYPE, Observation);
         builder.add(Variable1, inputVariable1, Observation1);
@@ -796,147 +799,41 @@ public class RDFManager {
         builder.add(Observation34, RDF.TYPE, Observation);
         builder.add(Variable34, inputVariable1, Observation34);
 
-        String timestamp = Instant.now().toString();
-        Triple tr_dataset = factory.createTriple(Observation1, dataset1, Dataset1);
         builder.add(Dataset1, RDF.TYPE, Dataset);
-        builder.add(tr_dataset, RDF.TYPE, dataset);
-        builder.add(tr_dataset, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset1 = factory.createTriple(Observation1, dataset1, Dataset1);
-        builder.add(tr_dataset1, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset1, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset2 = factory.createTriple(Observation2, dataset1, Dataset1);
-        builder.add(tr_dataset2, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset2, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset3 = factory.createTriple(Observation3, dataset1, Dataset1);
-        builder.add(tr_dataset3, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset3, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset4 = factory.createTriple(Observation4, dataset1, Dataset1);
-        builder.add(tr_dataset4, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset4, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset5 = factory.createTriple(Observation5, dataset1, Dataset1);
-        builder.add(tr_dataset5, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset5, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset6 = factory.createTriple(Observation6, dataset1, Dataset1);
-        builder.add(tr_dataset6, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset6, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset7 = factory.createTriple(Observation7, dataset1, Dataset1);
-        builder.add(tr_dataset7, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset7, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset8 = factory.createTriple(Observation8, dataset1, Dataset1);
-        builder.add(tr_dataset8, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset8, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset9 = factory.createTriple(Observation9, dataset1, Dataset1);
-        builder.add(tr_dataset9, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset9, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset10 = factory.createTriple(Observation10, dataset1, Dataset1);
-        builder.add(tr_dataset10, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset10, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset11 = factory.createTriple(Observation11, dataset1, Dataset1);
-        builder.add(tr_dataset11, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset11, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset12 = factory.createTriple(Observation12, dataset1, Dataset1);
-        builder.add(tr_dataset12, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset12, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset13 = factory.createTriple(Observation13, dataset1, Dataset1);
-        builder.add(tr_dataset13, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset13, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset14 = factory.createTriple(Observation14, dataset1, Dataset1);
-        builder.add(tr_dataset14, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset14, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset15 = factory.createTriple(Observation15, dataset1, Dataset1);
-        builder.add(tr_dataset15, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset15, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset16 = factory.createTriple(Observation16, dataset1, Dataset1);
-        builder.add(tr_dataset16, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset16, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset17 = factory.createTriple(Observation17, dataset1, Dataset1);
-        builder.add(tr_dataset17, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset17, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset18 = factory.createTriple(Observation18, dataset1, Dataset1);
-        builder.add(tr_dataset18, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset18, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset19 = factory.createTriple(Observation19, dataset1, Dataset1);
-        builder.add(tr_dataset19, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset19, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset20 = factory.createTriple(Observation20, dataset1, Dataset1);
-        builder.add(tr_dataset20, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset20, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset21 = factory.createTriple(Observation21, dataset1, Dataset1);
-        builder.add(tr_dataset21, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset21, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset22 = factory.createTriple(Observation22, dataset1, Dataset1);
-        builder.add(tr_dataset22, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset22, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset23 = factory.createTriple(Observation23, dataset1, Dataset1);
-        builder.add(tr_dataset23, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset23, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset24 = factory.createTriple(Observation24, dataset1, Dataset1);
-        builder.add(tr_dataset24, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset24, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset25 = factory.createTriple(Observation25, dataset1, Dataset1);
-        builder.add(tr_dataset25, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset25, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset26 = factory.createTriple(Observation26, dataset1, Dataset1);
-        builder.add(tr_dataset26, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset26, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset27 = factory.createTriple(Observation27, dataset1, Dataset1);
-        builder.add(tr_dataset27, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset27, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset28 = factory.createTriple(Observation28, dataset1, Dataset1);
-        builder.add(tr_dataset28, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset28, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset29 = factory.createTriple(Observation29, dataset1, Dataset1);
-        builder.add(tr_dataset29, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset29, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset30 = factory.createTriple(Observation30, dataset1, Dataset1);
-        builder.add(tr_dataset30, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset30, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset31 = factory.createTriple(Observation31, dataset1, Dataset1);
-        builder.add(tr_dataset31, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset31, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset32 = factory.createTriple(Observation32, dataset1, Dataset1);
-        builder.add(tr_dataset32, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset32, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset33 = factory.createTriple(Observation33, dataset1, Dataset1);
-        builder.add(tr_dataset33, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset33, hasDate1, Values.literal(timestamp));
-
-        Triple tr_dataset34 = factory.createTriple(Observation34, dataset1, Dataset1);
-        builder.add(tr_dataset34, RDF.TYPE, Dataset1);
-        builder.add(tr_dataset34, hasDate1, Values.literal(timestamp));
+        builder.add(Observation1, dataset1, Dataset1);
+        builder.add(Observation2, dataset1, Dataset1);
+        builder.add(Observation3, dataset1, Dataset1);
+        builder.add(Observation4, dataset1, Dataset1);
+        builder.add(Observation5, dataset1, Dataset1);
+        builder.add(Observation6, dataset1, Dataset1);
+        builder.add(Observation7, dataset1, Dataset1);
+        builder.add(Observation8, dataset1, Dataset1);
+        builder.add(Observation9, dataset1, Dataset1);
+        builder.add(Observation10, dataset1, Dataset1);
+        builder.add(Observation11, dataset1, Dataset1);
+        builder.add(Observation12, dataset1, Dataset1);
+        builder.add(Observation13, dataset1, Dataset1);
+        builder.add(Observation14, dataset1, Dataset1);
+        builder.add(Observation15, dataset1, Dataset1);
+        builder.add(Observation16, dataset1, Dataset1);
+        builder.add(Observation17, dataset1, Dataset1);
+        builder.add(Observation18, dataset1, Dataset1);
+        builder.add(Observation19, dataset1, Dataset1);
+        builder.add(Observation20, dataset1, Dataset1);
+        builder.add(Observation21, dataset1, Dataset1);
+        builder.add(Observation22, dataset1, Dataset1);
+        builder.add(Observation23, dataset1, Dataset1);
+        builder.add(Observation24, dataset1, Dataset1);
+        builder.add(Observation25, dataset1, Dataset1);
+        builder.add(Observation26, dataset1, Dataset1);
+        builder.add(Observation27, dataset1, Dataset1);
+        builder.add(Observation28, dataset1, Dataset1);
+        builder.add(Observation29, dataset1, Dataset1);
+        builder.add(Observation30, dataset1, Dataset1);
+        builder.add(Observation31, dataset1, Dataset1);
+        builder.add(Observation32, dataset1, Dataset1);
+        builder.add(Observation33, dataset1, Dataset1);
+        builder.add(Observation34, dataset1, Dataset1);
 
         builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);

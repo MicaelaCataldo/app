@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     public static Model model;
-    private static final String FILE_NAME = "questionnaire.ttl";
+    private static final String FILE_NAME = RDFManager.filename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 map.put("ans28", "1");
                 map.put("ans29", "0");
                 map.put("ans30", "1");
-                map.put("ans31", "1");
+                map.put("ans31", "0");
                 map.put("ans32", "0");
                 map.put("ans33", "1");
                 map.put("ans34", "0");
