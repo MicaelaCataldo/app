@@ -37,11 +37,11 @@ public class RDFManager {
         Model result = builder.build();
         result = questionnaireUCLADefinition(result);
         result = questionnaireIIEF5Definition(result);
+        result = questionnaireWPAIDefinition(result);
         return result;
     }
 
     public static Model questionnaireUCLADefinition(Model model){
-        // StringBuilder result = new StringBuilder();
 
         IRI Study = factory.createIRI(disco, "Study");
         // Create the generic classes that will be instanced as subjects and objects
@@ -619,7 +619,6 @@ public class RDFManager {
     }
 
     public static Model questionnaireIIEF5Definition(Model model){
-        // StringBuilder result = new StringBuilder();
 
         IRI Study = factory.createIRI(disco, "Study");
         // Create the generic classes that will be instanced as subjects and objects
@@ -863,6 +862,245 @@ public class RDFManager {
         builder.add(tr_hasTopConcept15, RDF.TYPE, hasTopConcept);
         Triple tr_hasScore15 = factory.createTriple(tr_hasTopConcept15, hasScore1, Values.literal("5"));
         builder.add(tr_hasScore15, RDF.TYPE, hasScore);
+
+        // Build the model
+        model = builder.build();
+
+        return model;
+    }
+
+    public static Model questionnaireWPAIDefinition(Model model){
+
+        IRI Study = factory.createIRI(disco, "Study");
+        // Create the generic classes that will be instanced as subjects and objects
+        IRI Questionnaire = factory.createIRI(disco, "Questionnaire");
+        IRI Question = factory.createIRI(disco, "Question");
+
+        IRI Variable = factory.createIRI(disco, "Variable");
+        IRI ConceptScheme = factory.createIRI(disco, "ConceptScheme");
+        IRI Concept = factory.createIRI(disco, "Concept");
+        IRI RepresentedVariable = factory.createIRI(disco, "RepresentedVariable");
+
+        // Create the generic classes that will be instanced as relationships (predicates)
+        IRI question = factory.createIRI(disco, "question");
+        IRI questionText = factory.createIRI(disco, "questionText");
+        IRI hasTopConcept = factory.createIRI(disco, "hasTopConcept");
+        IRI basedOn = factory.createIRI(disco, "basedOn");
+        IRI representation = factory.createIRI(disco, "representation");
+        IRI instrument = factory.createIRI(disco, "instrument");
+        IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
+
+        // Create the IRI of instances for UCLA Questionnaire
+        IRI QuestionnaireWPAI = factory.createIRI(cmg_vocabulary, "QuestionnaireWPAI");
+
+        IRI Question1 = factory.createIRI(cmg_vocabulary, "Question_WPAI_1");
+        IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable_WPAI_1");
+        IRI question1 = factory.createIRI(cmg_vocabulary, "question_WPAI_1");
+        IRI Question2 = factory.createIRI(cmg_vocabulary, "Question_WPAI_2");
+        IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable_WPAI_2");
+        IRI question2 = factory.createIRI(cmg_vocabulary, "question_WPAI_2");
+        IRI Question3 = factory.createIRI(cmg_vocabulary, "Question_WPAI_3");
+        IRI Variable3 = factory.createIRI(cmg_vocabulary, "Variable_WPAI_3");
+        IRI question3 = factory.createIRI(cmg_vocabulary, "question_WPAI_3");
+        IRI Question4 = factory.createIRI(cmg_vocabulary, "Question_WPAI_4");
+        IRI Variable4 = factory.createIRI(cmg_vocabulary, "Variable_WPAI_4");
+        IRI question4 = factory.createIRI(cmg_vocabulary, "question_WPAI_4");
+        IRI Question5 = factory.createIRI(cmg_vocabulary, "Question_WPAI_5");
+        IRI Variable5 = factory.createIRI(cmg_vocabulary, "Variable_WPAI_5");
+        IRI question5 = factory.createIRI(cmg_vocabulary, "question_WPAI_5");
+        IRI Question6 = factory.createIRI(cmg_vocabulary, "Question_WPAI_6");
+        IRI Variable6 = factory.createIRI(cmg_vocabulary, "Variable_WPAI_6");
+        IRI question6 = factory.createIRI(cmg_vocabulary, "question_WPAI_6");
+
+        IRI RepresentedVariable1 = factory.createIRI(cmg_vocabulary, "RepresentedVariable_WPAI_1");
+        IRI RepresentedVariable2 = factory.createIRI(cmg_vocabulary, "RepresentedVariable_WPAI_2");
+        IRI RepresentedVariable3 = factory.createIRI(cmg_vocabulary, "RepresentedVariable_WPAI_3");
+
+        IRI ConceptScheme1 = factory.createIRI(cmg_vocabulary, "ConceptScheme_WPAI_1");
+        IRI ConceptScheme2 = factory.createIRI(cmg_vocabulary, "ConceptScheme_WPAI_2");
+        IRI ConceptScheme3 = factory.createIRI(cmg_vocabulary, "ConceptScheme_WPAI_3");
+
+        IRI Concept1 = factory.createIRI(cmg_vocabulary, "Yes");
+        IRI Concept2 = factory.createIRI(cmg_vocabulary, "No");
+        IRI Concept3 = factory.createIRI(cmg_vocabulary, "0");
+        IRI Concept4 = factory.createIRI(cmg_vocabulary, "1");
+        IRI Concept5 = factory.createIRI(cmg_vocabulary, "2");
+        IRI Concept6 = factory.createIRI(cmg_vocabulary, "3");
+        IRI Concept7 = factory.createIRI(cmg_vocabulary, "4");
+        IRI Concept8 = factory.createIRI(cmg_vocabulary, "5");
+        IRI Concept9 = factory.createIRI(cmg_vocabulary, "6");
+        IRI Concept10 = factory.createIRI(cmg_vocabulary, "7");
+        IRI Concept11 = factory.createIRI(cmg_vocabulary, "8");
+        IRI Concept12 = factory.createIRI(cmg_vocabulary, "9");
+        IRI Concept13 = factory.createIRI(cmg_vocabulary, "10");
+
+
+        IRI hasScore1 = factory.createIRI(cmg_vocabulary, "hasScore_WPAI_1");
+
+        IRI hasTopConcept1 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_1");
+        IRI hasTopConcept2 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_2");
+        IRI hasTopConcept3 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_3");
+        IRI hasTopConcept4 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_4");
+        IRI hasTopConcept5 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_5");
+        IRI hasTopConcept6 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_6");
+        IRI hasTopConcept7 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_7");
+        IRI hasTopConcept8 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_8");
+        IRI hasTopConcept9 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_9");
+        IRI hasTopConcept10 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_10");
+        IRI hasTopConcept11 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_11");
+        IRI hasTopConcept12 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_12");
+        IRI hasTopConcept13 = factory.createIRI(cmg_vocabulary, "hasTopConcept_WPAI_13");
+
+        // Create the model builder
+        ModelBuilder builder = new ModelBuilder(model);
+
+        builder.setNamespace("disco", "http://rdf-vocabulary.ddialliance.org/discovery#");
+        builder.setNamespace("qb", "https://www.w3.org/TR/vocab-data-cube/#");
+        builder.setNamespace("cmg", "http://example.org/cmg_vocabulary#");
+
+        // Create the statements using ModelBuilder
+        builder.add(Study, instrument, QuestionnaireWPAI);
+        builder.add(QuestionnaireWPAI, RDF.TYPE, Questionnaire);
+
+        // Create the statement <QuestionN a Question> for each Question
+        builder.add(Question1, RDF.TYPE, Question);
+        builder.add(Question2, RDF.TYPE, Question);
+        builder.add(Question3, RDF.TYPE, Question);
+        builder.add(Question4, RDF.TYPE, Question);
+        builder.add(Question5, RDF.TYPE, Question);
+        builder.add(Question6, RDF.TYPE, Question);
+
+        builder.add(QuestionnaireWPAI, question, Question1);
+        builder.add(QuestionnaireWPAI, question, Question2);
+        builder.add(QuestionnaireWPAI, question, Question3);
+        builder.add(QuestionnaireWPAI, question, Question4);
+        builder.add(QuestionnaireWPAI, question, Question5);
+        builder.add(QuestionnaireWPAI, question, Question6);
+
+        // Add the text of each question (statement <QuestionN questionText Values.literal(TextOfTheQuestion)>)
+        builder.add(Question1, questionText, Values.literal("Are you currently employed (receiving a salary)?"));
+        builder.add(Question2, questionText, Values.literal("During the past 7 days, how many hours have you been absent from work due to problems related to your RA?"));
+        builder.add(Question3, questionText, Values.literal("During the past 7 days, how many hours have you been absent from work for other reasons, such as vacations, holidays, or time off?"));
+        builder.add(Question4, questionText, Values.literal("During the past 7 days, how many hours did you actually work?"));
+        builder.add(Question5, questionText, Values.literal("During the past 7 days, to what extent has your RA affected your productivity while working?"));
+        builder.add(Question6, questionText, Values.literal("During the past 7 days, to what extent has your RA affected your ability to perform your normal daily activities, excluding work?"));
+
+        // Create the statement <VariableN a Variable> for each Variable
+        builder.add(Variable1, RDF.TYPE, Variable);
+        builder.add(Variable2, RDF.TYPE, Variable);
+        builder.add(Variable3, RDF.TYPE, Variable);
+        builder.add(Variable4, RDF.TYPE, Variable);
+        builder.add(Variable5, RDF.TYPE, Variable);
+        builder.add(Variable6, RDF.TYPE, Variable);
+
+        // Create the <VariableN questionN QuestionN> statement for each Question
+        builder.add(Variable1, question1, Question1);
+        builder.add(Variable2, question2, Question2);
+        builder.add(Variable3, question3, Question3);
+        builder.add(Variable4, question4, Question4);
+        builder.add(Variable5, question5, Question5);
+        builder.add(Variable6, question6, Question6);
+
+        // Create the <RepresentedVariableN a RepresentedVariable> statement for each RepresentedVariable
+        builder.add(RepresentedVariable1, RDF.TYPE, RepresentedVariable);
+        builder.add(RepresentedVariable2, RDF.TYPE, RepresentedVariable);
+
+        // Create the <VariableN basedOn RepresentedVariableM> statement for each Variable
+        builder.add(Variable1, basedOn, RepresentedVariable1);
+        builder.add(Variable5, basedOn, RepresentedVariable2);
+        builder.add(Variable6, basedOn, RepresentedVariable2);
+
+        // Create the <ConceptSchemeN a ConceptScheme> statement for each ConceptScheme
+        builder.add(ConceptScheme1, RDF.TYPE, ConceptScheme);
+        builder.add(ConceptScheme2, RDF.TYPE, ConceptScheme);
+
+        // Create the <RepresentedVariableN representation ConceptSchemeN> statement for each RepresentedVariable
+        builder.add(RepresentedVariable1, representation, ConceptScheme1);
+        builder.add(RepresentedVariable2, representation, ConceptScheme2);
+
+        // Create the <ConceptN a Concept> statement for each Concept
+        builder.add(Concept1, RDF.TYPE, Concept);
+        builder.add(Concept2, RDF.TYPE, Concept);
+        builder.add(Concept3, RDF.TYPE, Concept);
+        builder.add(Concept4, RDF.TYPE, Concept);
+        builder.add(Concept5, RDF.TYPE, Concept);
+        builder.add(Concept6, RDF.TYPE, Concept);
+        builder.add(Concept7, RDF.TYPE, Concept);
+        builder.add(Concept8, RDF.TYPE, Concept);
+        builder.add(Concept9, RDF.TYPE, Concept);
+        builder.add(Concept10, RDF.TYPE, Concept);
+        builder.add(Concept11, RDF.TYPE, Concept);
+        builder.add(Concept12, RDF.TYPE, Concept);
+        builder.add(Concept13, RDF.TYPE, Concept);
+
+        // Create the <ConceptSchemeN hasTopConcept ConceptN> statement for each ConceptScheme1
+        // Create the <tr_hasTopConcept a hasTopConcept> statement for each tr_hasTopConcept
+        // Create the <tr_hasTopConceptN hasScoreN Values.literal(points)> statement for each tr_hasTopConcept
+        // Create the <hasScoreN a hasScore> statement for each hasScore
+        Triple tr_hasTopConcept1 = factory.createTriple(ConceptScheme1, hasTopConcept1, Concept1);
+        builder.add(tr_hasTopConcept1, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore1 = factory.createTriple(tr_hasTopConcept1, hasScore1, Values.literal("Yes"));
+        builder.add(tr_hasScore1, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept2 = factory.createTriple(ConceptScheme1, hasTopConcept2, Concept2);
+        builder.add(tr_hasTopConcept2, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore2 = factory.createTriple(tr_hasTopConcept2, hasScore1, Values.literal("No"));
+        builder.add(tr_hasScore2, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept3 = factory.createTriple(ConceptScheme2, hasTopConcept3, Concept3);
+        builder.add(tr_hasTopConcept3, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore3 = factory.createTriple(tr_hasTopConcept3, hasScore1, Values.literal("0"));
+        builder.add(tr_hasScore3, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept4 = factory.createTriple(ConceptScheme2, hasTopConcept4, Concept4);
+        builder.add(tr_hasTopConcept4, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore4 = factory.createTriple(tr_hasTopConcept4, hasScore1, Values.literal("1"));
+        builder.add(tr_hasScore4, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept5 = factory.createTriple(ConceptScheme2, hasTopConcept5, Concept5);
+        builder.add(tr_hasTopConcept5, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore5 = factory.createTriple(tr_hasTopConcept5, hasScore1, Values.literal("2"));
+        builder.add(tr_hasScore5, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept6 = factory.createTriple(ConceptScheme2, hasTopConcept6, Concept6);
+        builder.add(tr_hasTopConcept6, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore6 = factory.createTriple(tr_hasTopConcept6, hasScore1, Values.literal("3"));
+        builder.add(tr_hasScore6, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept7 = factory.createTriple(ConceptScheme2, hasTopConcept7, Concept7);
+        builder.add(tr_hasTopConcept7, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore7 = factory.createTriple(tr_hasTopConcept7, hasScore1, Values.literal("4"));
+        builder.add(tr_hasScore7, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept8 = factory.createTriple(ConceptScheme2, hasTopConcept8, Concept8);
+        builder.add(tr_hasTopConcept8, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore8 = factory.createTriple(tr_hasTopConcept8, hasScore1, Values.literal("5"));
+        builder.add(tr_hasScore8, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept9 = factory.createTriple(ConceptScheme2, hasTopConcept9, Concept9);
+        builder.add(tr_hasTopConcept9, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore9 = factory.createTriple(tr_hasTopConcept9, hasScore1, Values.literal("6"));
+        builder.add(tr_hasScore9, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept10 = factory.createTriple(ConceptScheme2, hasTopConcept10, Concept10);
+        builder.add(tr_hasTopConcept10, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore10 = factory.createTriple(tr_hasTopConcept10, hasScore1, Values.literal("7"));
+        builder.add(tr_hasScore10, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept11 = factory.createTriple(ConceptScheme2, hasTopConcept11, Concept11);
+        builder.add(tr_hasTopConcept11, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore11 = factory.createTriple(tr_hasTopConcept11, hasScore1, Values.literal("8"));
+        builder.add(tr_hasScore11, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept12 = factory.createTriple(ConceptScheme2, hasTopConcept12, Concept12);
+        builder.add(tr_hasTopConcept12, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore12 = factory.createTriple(tr_hasTopConcept12, hasScore1, Values.literal("9"));
+        builder.add(tr_hasScore12, RDF.TYPE, hasScore);
+
+        Triple tr_hasTopConcept13 = factory.createTriple(ConceptScheme2, hasTopConcept13, Concept13);
+        builder.add(tr_hasTopConcept13, RDF.TYPE, hasTopConcept);
+        Triple tr_hasScore13 = factory.createTriple(tr_hasTopConcept13, hasScore1, Values.literal("10"));
+        builder.add(tr_hasScore13, RDF.TYPE, hasScore);
 
         // Build the model
         model = builder.build();
@@ -1195,6 +1433,84 @@ public class RDFManager {
         builder.add(Observation3, dataset1, Dataset1);
         builder.add(Observation4, dataset1, Dataset1);
         builder.add(Observation5, dataset1, Dataset1);
+
+        builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
+        builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
+
+        model = builder.build();
+
+        return model;
+    }
+
+    public static Model addAnswersWPAI(HashMap<String, String> map, Model model){
+        IRI QuestionnaireWPAI = factory.createIRI(cmg_vocabulary, "QuestionnaireWPAI");
+        IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
+        IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
+        IRI Variable3 = factory.createIRI(cmg_vocabulary, "Variable3");
+        IRI Variable4 = factory.createIRI(cmg_vocabulary, "Variable4");
+        IRI Variable5 = factory.createIRI(cmg_vocabulary, "Variable5");
+        IRI Variable6 = factory.createIRI(cmg_vocabulary, "Variable6");
+
+        IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
+        IRI Dataset = factory.createIRI(qb, "Dataset");
+        IRI Observation = factory.createIRI(qb, "Observation");
+        IRI aggregation = factory.createIRI(disco, "aggregation");
+        IRI dataset = factory.createIRI(qb, "dataset");
+        IRI inputVariable = factory.createIRI(qb, "inputVariable");
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
+        String timestamp = now.format(formatter);
+
+        IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
+
+        IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
+        IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
+        IRI Observation3 = factory.createIRI(cmg_vocabulary, timestamp+"_3_"+ map.get("ans3"));
+        IRI Observation4 = factory.createIRI(cmg_vocabulary, timestamp+"_4_"+ map.get("ans4"));
+        IRI Observation5 = factory.createIRI(cmg_vocabulary, timestamp+"_5_"+ map.get("ans5"));
+        IRI Observation6 = factory.createIRI(cmg_vocabulary, timestamp+"_6_"+ map.get("ans6"));
+
+        IRI LogicalDataset1 = factory.createIRI(cmg_vocabulary, "LogicalDataset1");
+        IRI dataset1 = factory.createIRI(cmg_vocabulary, "dataset");
+        IRI inputVariable1 = factory.createIRI(cmg_vocabulary, "inputVariable1");
+        IRI aggregation1 = factory.createIRI(cmg_vocabulary, "aggregation1");
+        IRI instrument1 = factory.createIRI(disco, "instrument1");
+
+        // Create the model builder
+        ModelBuilder builder = new ModelBuilder(model);
+
+        builder.add(dataset1, RDF.TYPE, dataset);
+        builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
+        builder.add(LogicalDataset, instrument1, QuestionnaireWPAI);
+
+        builder.add(inputVariable1, RDF.TYPE, inputVariable);
+
+        builder.add(Observation1, RDF.TYPE, Observation);
+        builder.add(Variable1, inputVariable1, Observation1);
+
+        builder.add(Observation2, RDF.TYPE, Observation);
+        builder.add(Variable2, inputVariable1, Observation2);
+
+        builder.add(Observation3, RDF.TYPE, Observation);
+        builder.add(Variable3, inputVariable1, Observation3);
+
+        builder.add(Observation4, RDF.TYPE, Observation);
+        builder.add(Variable4, inputVariable1, Observation4);
+
+        builder.add(Observation5, RDF.TYPE, Observation);
+        builder.add(Variable5, inputVariable1, Observation5);
+
+        builder.add(Observation6, RDF.TYPE, Observation);
+        builder.add(Variable6, inputVariable1, Observation6);
+
+        builder.add(Dataset1, RDF.TYPE, Dataset);
+        builder.add(Observation1, dataset1, Dataset1);
+        builder.add(Observation2, dataset1, Dataset1);
+        builder.add(Observation3, dataset1, Dataset1);
+        builder.add(Observation4, dataset1, Dataset1);
+        builder.add(Observation5, dataset1, Dataset1);
+        builder.add(Observation6, dataset1, Dataset1);
 
         builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
