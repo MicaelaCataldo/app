@@ -1,5 +1,6 @@
 package it.poliba.cmg.sscentry;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         button2.setText("Compila questionario IIEF5");
         Button button3 = findViewById(R.id.button3);
         button3.setText("Compila questionario WPAI");
+        Button button4 = findViewById(R.id.button4);
+        button3.setText("Esegui query");
 
     button1.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -163,6 +166,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String queryResult = "query";
+                Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
+                intent.putExtra("queryResult", queryResult);
+                startActivity(intent);
+
+            }
+        });
 }
 
     private boolean fileExists() {
