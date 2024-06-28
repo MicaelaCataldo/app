@@ -28,18 +28,20 @@ public class RDFManager {
 
     // Create a ValueFactory to create RDF objects
     public static ValueFactory factory = SimpleValueFactory.getInstance();
-    private static Model model;
+    // private static Model model;
 
     // Funzione per generare tutte le strutture vuote, ossia solo domande e possibili risposte, dei questionari
-    // (al momento è stato implementato solo UCLA)
+    // (al momento è stato implementato solo UCLA e IIEF5)
     public static Model generateRDF() {
-       // Model result = questionnaireUCLADefinition();
-       Model result = questionnaireIIEF5Definition();
-       return result;
+        ModelBuilder builder = new ModelBuilder();
+        Model result = builder.build();
+        result = questionnaireUCLADefinition(result);
+        result = questionnaireIIEF5Definition(result);
+        return result;
     }
 
-    public static Model questionnaireUCLADefinition(){
-        StringBuilder result = new StringBuilder();
+    public static Model questionnaireUCLADefinition(Model model){
+        // StringBuilder result = new StringBuilder();
 
         IRI Study = factory.createIRI(disco, "Study");
         // Create the generic classes that will be instanced as subjects and objects
@@ -227,7 +229,7 @@ public class RDFManager {
         IRI hasTopConcept6 = factory.createIRI(cmg_vocabulary, "hasTopConcept_UCLA_6");
 
         // Create the model builder
-        ModelBuilder builder = new ModelBuilder();
+        ModelBuilder builder = new ModelBuilder(model);
 
         builder.setNamespace("disco", "http://rdf-vocabulary.ddialliance.org/discovery#");
         builder.setNamespace("qb", "https://www.w3.org/TR/vocab-data-cube/#");
@@ -616,8 +618,8 @@ public class RDFManager {
         return model;
     }
 
-    public static Model questionnaireIIEF5Definition(){
-        StringBuilder result = new StringBuilder();
+    public static Model questionnaireIIEF5Definition(Model model){
+        // StringBuilder result = new StringBuilder();
 
         IRI Study = factory.createIRI(disco, "Study");
         // Create the generic classes that will be instanced as subjects and objects
@@ -700,7 +702,7 @@ public class RDFManager {
         IRI hasTopConcept15 = factory.createIRI(cmg_vocabulary, "hasTopConcept_IIEF5_15");
 
         // Create the model builder
-        ModelBuilder builder = new ModelBuilder();
+        ModelBuilder builder = new ModelBuilder(model);
 
         builder.setNamespace("disco", "http://rdf-vocabulary.ddialliance.org/discovery#");
         builder.setNamespace("qb", "https://www.w3.org/TR/vocab-data-cube/#");
@@ -1120,6 +1122,79 @@ public class RDFManager {
         builder.add(Observation32, dataset1, Dataset1);
         builder.add(Observation33, dataset1, Dataset1);
         builder.add(Observation34, dataset1, Dataset1);
+
+        builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
+        builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
+
+        model = builder.build();
+
+        return model;
+    }
+
+    // Funzione che aggiunge al modello le risposte fornite in una nuova compilazione del questionario
+    public static Model addAnswersIIEF5(HashMap<String, String> map, Model model){
+        IRI QuestionnaireIIEF5 = factory.createIRI(cmg_vocabulary, "QuestionnaireIIEF5");
+        IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
+        IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
+        IRI Variable3 = factory.createIRI(cmg_vocabulary, "Variable3");
+        IRI Variable4 = factory.createIRI(cmg_vocabulary, "Variable4");
+        IRI Variable5 = factory.createIRI(cmg_vocabulary, "Variable5");
+
+        IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
+        IRI Dataset = factory.createIRI(qb, "Dataset");
+        IRI Observation = factory.createIRI(qb, "Observation");
+        IRI aggregation = factory.createIRI(disco, "aggregation");
+        IRI dataset = factory.createIRI(qb, "dataset");
+        IRI inputVariable = factory.createIRI(qb, "inputVariable");
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
+        String timestamp = now.format(formatter);
+
+        IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
+
+        IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
+        IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
+        IRI Observation3 = factory.createIRI(cmg_vocabulary, timestamp+"_3_"+ map.get("ans3"));
+        IRI Observation4 = factory.createIRI(cmg_vocabulary, timestamp+"_4_"+ map.get("ans4"));
+        IRI Observation5 = factory.createIRI(cmg_vocabulary, timestamp+"_5_"+ map.get("ans5"));
+
+        IRI LogicalDataset1 = factory.createIRI(cmg_vocabulary, "LogicalDataset1");
+        IRI dataset1 = factory.createIRI(cmg_vocabulary, "dataset");
+        IRI inputVariable1 = factory.createIRI(cmg_vocabulary, "inputVariable1");
+        IRI aggregation1 = factory.createIRI(cmg_vocabulary, "aggregation1");
+        IRI instrument1 = factory.createIRI(disco, "instrument1");
+
+        // Create the model builder
+        ModelBuilder builder = new ModelBuilder(model);
+
+        builder.add(dataset1, RDF.TYPE, dataset);
+        builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
+        builder.add(LogicalDataset, instrument1, QuestionnaireIIEF5);
+
+        builder.add(inputVariable1, RDF.TYPE, inputVariable);
+
+        builder.add(Observation1, RDF.TYPE, Observation);
+        builder.add(Variable1, inputVariable1, Observation1);
+
+        builder.add(Observation2, RDF.TYPE, Observation);
+        builder.add(Variable2, inputVariable1, Observation2);
+
+        builder.add(Observation3, RDF.TYPE, Observation);
+        builder.add(Variable3, inputVariable1, Observation3);
+
+        builder.add(Observation4, RDF.TYPE, Observation);
+        builder.add(Variable4, inputVariable1, Observation4);
+
+        builder.add(Observation5, RDF.TYPE, Observation);
+        builder.add(Variable5, inputVariable1, Observation5);
+
+        builder.add(Dataset1, RDF.TYPE, Dataset);
+        builder.add(Observation1, dataset1, Dataset1);
+        builder.add(Observation2, dataset1, Dataset1);
+        builder.add(Observation3, dataset1, Dataset1);
+        builder.add(Observation4, dataset1, Dataset1);
+        builder.add(Observation5, dataset1, Dataset1);
 
         builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
