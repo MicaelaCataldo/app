@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         Button button3 = findViewById(R.id.button3);
         button3.setText("Compila questionario WPAI");
         Button button4 = findViewById(R.id.button4);
-        button4.setText("Esegui query");
+        button4.setText("Esegui query 1");
+        Button button5 = findViewById(R.id.button5);
+        button5.setText("Esegui query 2");
 
     button1.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -170,12 +172,25 @@ public class MainActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String queryResult = "query";
+                String queryType = "1";
                 Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
+                intent.putExtra("type", queryType);
                 startActivity(intent);
 
             }
         });
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String queryType = "2";
+                Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
+                intent.putExtra("type", queryType);
+                startActivity(intent);
+
+            }
+        });
+
 }
 
     private boolean fileExists() {

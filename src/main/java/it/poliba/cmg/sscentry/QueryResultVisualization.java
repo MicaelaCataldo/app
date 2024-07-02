@@ -22,18 +22,34 @@ public class QueryResultVisualization extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_result_visualization);
         TextView textView = findViewById(R.id.textView2);
-
+        Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
         Model model = RDFManager.readRDFFromFile(new File(getFilesDir(), RDFManager.filename));
 
-        String subject = null;
-        IRI object = factory.createIRI(RDFManager.rdf, "Sequence_UCLA_1");
-        IRI predicate = factory.createIRI(RDFManager.cmg_vocabulary, "sequence");
+        if(type.equals("1")){
+            IRI subject = null;
+            IRI predicate = factory.createIRI(RDFManager.cmg_vocabulary, "sequence");
+            IRI object = factory.createIRI(RDFManager.rdf, "Sequence_UCLA_1");
 
-        Model newModel = getQueryResult(model, subject, predicate, object);
-        textView.setText(RDFManager.printModel(newModel));
+            Model newModel = getQueryResult(model, subject, predicate, object);
+            textView.setText(RDFManager.printModel(newModel));
+
+        } else if (type.equals("2")){
+            IRI subject = null;
+            IRI predicate = factory.createIRI(RDFManager.cmg_vocabulary, "dataset");
+            IRI object = factory.createIRI(RDFManager.rdf, "Dataset_+2024/07/02_09:33:52");
+
+            Model newModel = getQueryResult(model, subject, predicate, object);
+            textView.setText(RDFManager.printModel(newModel));
+
+        } else {
+            textView.setText("Nessuna query eseguibile");
+        }
+
+
     }
 
-    public Model getQueryResult(Model model, String subject, IRI predicate, IRI object){
+    public Model getQueryResult(Model model, IRI subject, IRI predicate, IRI object){
         Model modelFiltered = model.filter(null, predicate, object);
         return modelFiltered;
     }
