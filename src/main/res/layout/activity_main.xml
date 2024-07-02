@@ -19,33 +19,33 @@
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Compila questionario UCLA"
+                android:text="Submit UCLA Questionnaire"
                 android:layout_marginBottom="16dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Compila questionario IIEF5"
+                android:text="Submit IIEF5 Questionnaire"
                 android:layout_marginBottom="16dp" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Compila questionario WPAI"
+                android:text="Submit WPAI Questionnaire"
                 android:layout_marginBottom="16dp" />
             <Button
                 android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Compila questionario WPAI"
+                android:text="Run query 2"
                 android:layout_marginBottom="16dp" />
             <Button
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Compila questionario WPAI"
+                android:text="Run query 2"
                 android:layout_marginBottom="16dp" />
 
             <TextView

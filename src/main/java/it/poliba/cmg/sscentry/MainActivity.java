@@ -26,15 +26,15 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView);
         Button button1 = findViewById(R.id.button1);
-        button1.setText("Compila questionario UCLA");
+        button1.setText("Submit UCLA Questionnaire");
         Button button2 = findViewById(R.id.button2);
-        button2.setText("Compila questionario IIEF5");
+        button2.setText("Submit IIEF5 Questionnaire");
         Button button3 = findViewById(R.id.button3);
-        button3.setText("Compila questionario WPAI");
+        button3.setText("Submit WPAI Questionnaire");
         Button button4 = findViewById(R.id.button4);
-        button4.setText("Esegui query 1");
+        button4.setText("Run query 1");
         Button button5 = findViewById(R.id.button5);
-        button5.setText("Esegui query 2");
+        button5.setText("Run query 2");
 
     button1.setOnClickListener(new View.OnClickListener() {
         @Override

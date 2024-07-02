@@ -37,13 +37,13 @@ public class QueryResultVisualization extends AppCompatActivity {
         } else if (type.equals("2")){
             IRI subject = null;
             IRI predicate = factory.createIRI(RDFManager.cmg_vocabulary, "dataset");
-            IRI object = factory.createIRI(RDFManager.rdf, "Dataset_+2024/07/02_09:33:52");
+            IRI object = factory.createIRI(RDFManager.cmg_vocabulary, "Dataset_2024/07/02_09:33:52");
 
             Model newModel = getQueryResult(model, subject, predicate, object);
             textView.setText(RDFManager.printModel(newModel));
 
         } else {
-            textView.setText("Nessuna query eseguibile");
+            textView.setText("No executable query");
         }
 
 
