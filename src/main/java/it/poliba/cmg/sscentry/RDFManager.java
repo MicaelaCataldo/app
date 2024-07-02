@@ -1,5 +1,7 @@
 package it.poliba.cmg.sscentry;
 
+import androidx.annotation.NonNull;
+
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Triple;
@@ -24,22 +26,12 @@ public class RDFManager {
     public static final String disco = "http://rdf-vocabulary.ddialliance.org/discovery#";
     public static final String qb = "https://www.w3.org/TR/vocab-data-cube/#";
     public static final String cmg_vocabulary = "http://example.org/cmg_vocabulary#";
+    public static final String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns";
     public static final String filename = "questionnaire.ttl";
 
     // Create a ValueFactory to create RDF objects
     public static ValueFactory factory = SimpleValueFactory.getInstance();
     // private static Model model;
-
-    // Funzione per generare tutte le strutture vuote, ossia solo domande e possibili risposte, dei questionari
-    // (al momento è stato implementato solo UCLA e IIEF5)
-    public static Model generateRDF() {
-        ModelBuilder builder = new ModelBuilder();
-        Model result = builder.build();
-        result = questionnaireUCLADefinition(result);
-        result = questionnaireIIEF5Definition(result);
-        result = questionnaireWPAIDefinition(result);
-        return result;
-    }
 
     public static Model questionnaireUCLADefinition(Model model){
 
@@ -233,7 +225,8 @@ public class RDFManager {
 
         builder.setNamespace("disco", "http://rdf-vocabulary.ddialliance.org/discovery#");
         builder.setNamespace("qb", "https://www.w3.org/TR/vocab-data-cube/#");
-        builder.setNamespace("cmg", "http://example.org/cmg_vocabulary#");
+        builder.setNamespace("cmg_vocabulary", "http://example.org/cmg_vocabulary#");
+        builder.setNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns");
 
         // Create the statements using ModelBuilder
         builder.add(Study, instrument, QuestionnaireUCLA);
@@ -706,6 +699,7 @@ public class RDFManager {
         builder.setNamespace("disco", "http://rdf-vocabulary.ddialliance.org/discovery#");
         builder.setNamespace("qb", "https://www.w3.org/TR/vocab-data-cube/#");
         builder.setNamespace("cmg", "http://example.org/cmg_vocabulary#");
+        builder.setNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns");
 
         // Create the statements using ModelBuilder
         builder.add(Study, instrument, QuestionnaireIIEF5);
@@ -957,6 +951,7 @@ public class RDFManager {
         builder.setNamespace("disco", "http://rdf-vocabulary.ddialliance.org/discovery#");
         builder.setNamespace("qb", "https://www.w3.org/TR/vocab-data-cube/#");
         builder.setNamespace("cmg", "http://example.org/cmg_vocabulary#");
+        builder.setNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns");
 
         // Create the statements using ModelBuilder
         builder.add(Study, instrument, QuestionnaireWPAI);
@@ -1108,22 +1103,18 @@ public class RDFManager {
         return model;
     }
 
-    // Funzione che genera il file RDF corrispondente a un certo modello
-    public static boolean saveRDFToFile(File file, Model model) {
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            Rio.write(model, fos, RDFFormat.TURTLESTAR);
-            file.setReadable(true, false);
-            file.setWritable(true, false);
-            file.setExecutable(true, false);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+    // Funzione per generare tutte le strutture vuote, ossia solo domande e possibili risposte, dei questionari
+    public static Model generateRDF() {
+        ModelBuilder builder = new ModelBuilder();
+        Model result = builder.build();
+        result = questionnaireUCLADefinition(result);
+        result = questionnaireIIEF5Definition(result);
+        result = questionnaireWPAIDefinition(result);
+        return result;
     }
 
     // Funzione che aggiunge al modello le risposte fornite in una nuova compilazione del questionario
-    public static Model addAnswersUCLA(HashMap<String, String> map, Model model){
+    public static Model addAnswersUCLA(@NonNull HashMap<String, String> map, Model model){
         IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
         IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
         IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
@@ -1160,6 +1151,9 @@ public class RDFManager {
         IRI Variable33 = factory.createIRI(cmg_vocabulary, "Variable33");
         IRI Variable34 = factory.createIRI(cmg_vocabulary, "Variable34");
 
+        IRI Seq = factory.createIRI(rdf, "Sequence");
+        IRI sequence = factory.createIRI(cmg_vocabulary, "sequence");
+
         IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
         IRI Dataset = factory.createIRI(qb, "Dataset");
         IRI Observation = factory.createIRI(qb, "Observation");
@@ -1172,6 +1166,41 @@ public class RDFManager {
         String timestamp = now.format(formatter);
 
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
+
+        IRI Seq1 = factory.createIRI(rdf, "Sequence_UCLA_1");
+        IRI Seq2 = factory.createIRI(rdf, "Sequence_UCLA_2");
+        IRI Seq3 = factory.createIRI(rdf, "Sequence_UCLA_3");
+        IRI Seq4 = factory.createIRI(rdf, "Sequence_UCLA_4");
+        IRI Seq5 = factory.createIRI(rdf, "Sequence_UCLA_5");
+        IRI Seq6 = factory.createIRI(rdf, "Sequence_UCLA_6");
+        IRI Seq7 = factory.createIRI(rdf, "Sequence_UCLA_7");
+        IRI Seq8 = factory.createIRI(rdf, "Sequence_UCLA_8");
+        IRI Seq9 = factory.createIRI(rdf, "Sequence_UCLA_9");
+        IRI Seq10 = factory.createIRI(rdf, "Sequence_UCLA_10");
+        IRI Seq11 = factory.createIRI(rdf, "Sequence_UCLA_11");
+        IRI Seq12 = factory.createIRI(rdf, "Sequence_UCLA_12");
+        IRI Seq13 = factory.createIRI(rdf, "Sequence_UCLA_13");
+        IRI Seq14 = factory.createIRI(rdf, "Sequence_UCLA_14");
+        IRI Seq15 = factory.createIRI(rdf, "Sequence_UCLA_15");
+        IRI Seq16 = factory.createIRI(rdf, "Sequence_UCLA_16");
+        IRI Seq17 = factory.createIRI(rdf, "Sequence_UCLA_17");
+        IRI Seq18 = factory.createIRI(rdf, "Sequence_UCLA_18");
+        IRI Seq19 = factory.createIRI(rdf, "Sequence_UCLA_19");
+        IRI Seq20 = factory.createIRI(rdf, "Sequence_UCLA_20");
+        IRI Seq21 = factory.createIRI(rdf, "Sequence_UCLA_21");
+        IRI Seq22 = factory.createIRI(rdf, "Sequence_UCLA_22");
+        IRI Seq23 = factory.createIRI(rdf, "Sequence_UCLA_23");
+        IRI Seq24 = factory.createIRI(rdf, "Sequence_UCLA_24");
+        IRI Seq25 = factory.createIRI(rdf, "Sequence_UCLA_25");
+        IRI Seq26 = factory.createIRI(rdf, "Sequence_UCLA_26");
+        IRI Seq27 = factory.createIRI(rdf, "Sequence_UCLA_27");
+        IRI Seq28 = factory.createIRI(rdf, "Sequence_UCLA_28");
+        IRI Seq29 = factory.createIRI(rdf, "Sequence_UCLA_29");
+        IRI Seq30 = factory.createIRI(rdf, "Sequence_UCLA_30");
+        IRI Seq31 = factory.createIRI(rdf, "Sequence_UCLA_31");
+        IRI Seq32 = factory.createIRI(rdf, "Sequence_UCLA_32");
+        IRI Seq33 = factory.createIRI(rdf, "Sequence_UCLA_33");
+        IRI Seq34 = factory.createIRI(rdf, "Sequence_UCLA_34");
 
         IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
         IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
@@ -1224,106 +1253,174 @@ public class RDFManager {
         builder.add(inputVariable1, RDF.TYPE, inputVariable);
 
         builder.add(Observation1, RDF.TYPE, Observation);
+        builder.add(Seq1, RDF.TYPE, Seq);
         builder.add(Variable1, inputVariable1, Observation1);
+        builder.add(Observation1, sequence, Seq1);
 
         builder.add(Observation2, RDF.TYPE, Observation);
+        builder.add(Seq2, RDF.TYPE, Seq);
         builder.add(Variable2, inputVariable1, Observation2);
+        builder.add(Observation2, sequence, Seq2);
 
         builder.add(Observation3, RDF.TYPE, Observation);
+        builder.add(Seq3, RDF.TYPE, Seq);
         builder.add(Variable3, inputVariable1, Observation3);
+        builder.add(Observation3, sequence, Seq3);
 
         builder.add(Observation4, RDF.TYPE, Observation);
+        builder.add(Seq4, RDF.TYPE, Seq);
         builder.add(Variable4, inputVariable1, Observation4);
+        builder.add(Observation4, sequence, Seq4);
 
         builder.add(Observation5, RDF.TYPE, Observation);
+        builder.add(Seq5, RDF.TYPE, Seq);
         builder.add(Variable5, inputVariable1, Observation5);
+        builder.add(Observation5, sequence, Seq5);
 
         builder.add(Observation6, RDF.TYPE, Observation);
+        builder.add(Seq6, RDF.TYPE, Seq);
         builder.add(Variable6, inputVariable1, Observation6);
+        builder.add(Observation6, sequence, Seq6);
 
         builder.add(Observation7, RDF.TYPE, Observation);
+        builder.add(Seq7, RDF.TYPE, Seq);
         builder.add(Variable7, inputVariable1, Observation7);
+        builder.add(Observation7, sequence, Seq7);
 
         builder.add(Observation8, RDF.TYPE, Observation);
+        builder.add(Seq8, RDF.TYPE, Seq);
         builder.add(Variable8, inputVariable1, Observation8);
+        builder.add(Observation8, sequence, Seq8);
 
         builder.add(Observation9, RDF.TYPE, Observation);
+        builder.add(Seq9, RDF.TYPE, Seq);
         builder.add(Variable9, inputVariable1, Observation9);
+        builder.add(Observation9, sequence, Seq9);
 
         builder.add(Observation10, RDF.TYPE, Observation);
+        builder.add(Seq10, RDF.TYPE, Seq);
         builder.add(Variable10, inputVariable1, Observation10);
+        builder.add(Observation10, sequence, Seq10);
 
         builder.add(Observation11, RDF.TYPE, Observation);
+        builder.add(Seq11, RDF.TYPE, Seq);
         builder.add(Variable11, inputVariable1, Observation11);
+        builder.add(Observation11, sequence, Seq11);
 
         builder.add(Observation12, RDF.TYPE, Observation);
+        builder.add(Seq12, RDF.TYPE, Seq);
         builder.add(Variable12, inputVariable1, Observation12);
+        builder.add(Observation12, sequence, Seq12);
 
         builder.add(Observation13, RDF.TYPE, Observation);
+        builder.add(Seq13, RDF.TYPE, Seq);
         builder.add(Variable13, inputVariable1, Observation13);
+        builder.add(Observation13, sequence, Seq13);
 
         builder.add(Observation14, RDF.TYPE, Observation);
+        builder.add(Seq14, RDF.TYPE, Seq);
         builder.add(Variable14, inputVariable1, Observation14);
+        builder.add(Observation14, sequence, Seq14);
 
         builder.add(Observation15, RDF.TYPE, Observation);
+        builder.add(Seq15, RDF.TYPE, Seq);
         builder.add(Variable15, inputVariable1, Observation15);
+        builder.add(Observation15, sequence, Seq15);
 
         builder.add(Observation16, RDF.TYPE, Observation);
+        builder.add(Seq16, RDF.TYPE, Seq);
         builder.add(Variable16, inputVariable1, Observation16);
+        builder.add(Observation16, sequence, Seq16);
 
         builder.add(Observation17, RDF.TYPE, Observation);
+        builder.add(Seq17, RDF.TYPE, Seq);
         builder.add(Variable17, inputVariable1, Observation17);
+        builder.add(Observation17, sequence, Seq17);
 
         builder.add(Observation18, RDF.TYPE, Observation);
+        builder.add(Seq18, RDF.TYPE, Seq);
         builder.add(Variable18, inputVariable1, Observation18);
+        builder.add(Observation18, sequence, Seq18);
 
         builder.add(Observation19, RDF.TYPE, Observation);
+        builder.add(Seq19, RDF.TYPE, Seq);
         builder.add(Variable19, inputVariable1, Observation19);
+        builder.add(Observation19, sequence, Seq19);
 
         builder.add(Observation20, RDF.TYPE, Observation);
+        builder.add(Seq20, RDF.TYPE, Seq);
         builder.add(Variable20, inputVariable1, Observation20);
+        builder.add(Observation20, sequence, Seq20);
 
         builder.add(Observation21, RDF.TYPE, Observation);
+        builder.add(Seq21, RDF.TYPE, Seq);
         builder.add(Variable21, inputVariable1, Observation21);
+        builder.add(Observation21, sequence, Seq21);
 
         builder.add(Observation22, RDF.TYPE, Observation);
+        builder.add(Seq22, RDF.TYPE, Seq);
         builder.add(Variable22, inputVariable1, Observation22);
+        builder.add(Observation22, sequence, Seq22);
 
         builder.add(Observation23, RDF.TYPE, Observation);
+        builder.add(Seq23, RDF.TYPE, Seq);
         builder.add(Variable23, inputVariable1, Observation23);
+        builder.add(Observation23, sequence, Seq23);
 
         builder.add(Observation24, RDF.TYPE, Observation);
+        builder.add(Seq24, RDF.TYPE, Seq);
         builder.add(Variable24, inputVariable1, Observation24);
+        builder.add(Observation24, sequence, Seq24);
 
         builder.add(Observation25, RDF.TYPE, Observation);
+        builder.add(Seq25, RDF.TYPE, Seq);
         builder.add(Variable25, inputVariable1, Observation25);
+        builder.add(Observation25, sequence, Seq25);
 
         builder.add(Observation26, RDF.TYPE, Observation);
+        builder.add(Seq26, RDF.TYPE, Seq);
         builder.add(Variable26, inputVariable1, Observation26);
+        builder.add(Observation26, sequence, Seq26);
 
         builder.add(Observation27, RDF.TYPE, Observation);
+        builder.add(Seq27, RDF.TYPE, Seq);
         builder.add(Variable27, inputVariable1, Observation27);
+        builder.add(Observation27, sequence, Seq27);
 
         builder.add(Observation28, RDF.TYPE, Observation);
+        builder.add(Seq28, RDF.TYPE, Seq);
         builder.add(Variable28, inputVariable1, Observation28);
+        builder.add(Observation28, sequence, Seq28);
 
         builder.add(Observation29, RDF.TYPE, Observation);
+        builder.add(Seq29, RDF.TYPE, Seq);
         builder.add(Variable29, inputVariable1, Observation29);
+        builder.add(Observation29, sequence, Seq29);
 
         builder.add(Observation30, RDF.TYPE, Observation);
+        builder.add(Seq30, RDF.TYPE, Seq);
         builder.add(Variable30, inputVariable1, Observation30);
+        builder.add(Observation30, sequence, Seq30);
 
         builder.add(Observation31, RDF.TYPE, Observation);
+        builder.add(Seq31, RDF.TYPE, Seq);
         builder.add(Variable31, inputVariable1, Observation31);
+        builder.add(Observation31, sequence, Seq31);
 
         builder.add(Observation32, RDF.TYPE, Observation);
+        builder.add(Seq32, RDF.TYPE, Seq);
         builder.add(Variable32, inputVariable1, Observation32);
+        builder.add(Observation32, sequence, Seq32);
 
         builder.add(Observation33, RDF.TYPE, Observation);
+        builder.add(Seq33, RDF.TYPE, Seq);
         builder.add(Variable33, inputVariable1, Observation33);
+        builder.add(Observation33, sequence, Seq33);
 
         builder.add(Observation34, RDF.TYPE, Observation);
+        builder.add(Seq34, RDF.TYPE, Seq);
         builder.add(Variable34, inputVariable1, Observation34);
+        builder.add(Observation34, sequence, Seq34);
 
         builder.add(Dataset1, RDF.TYPE, Dataset);
         builder.add(Observation1, dataset1, Dataset1);
@@ -1378,6 +1475,9 @@ public class RDFManager {
         IRI Variable4 = factory.createIRI(cmg_vocabulary, "Variable4");
         IRI Variable5 = factory.createIRI(cmg_vocabulary, "Variable5");
 
+        IRI Seq = factory.createIRI(rdf, "Sequence");
+        IRI sequence = factory.createIRI(cmg_vocabulary, "sequence");
+
         IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
         IRI Dataset = factory.createIRI(qb, "Dataset");
         IRI Observation = factory.createIRI(qb, "Observation");
@@ -1390,6 +1490,12 @@ public class RDFManager {
         String timestamp = now.format(formatter);
 
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
+
+        IRI Seq1 = factory.createIRI(rdf, "Sequence_IIEF5_1");
+        IRI Seq2 = factory.createIRI(rdf, "Sequence_IIEF5_2");
+        IRI Seq3 = factory.createIRI(rdf, "Sequence_IIEF5_3");
+        IRI Seq4 = factory.createIRI(rdf, "Sequence_IIEF5_4");
+        IRI Seq5 = factory.createIRI(rdf, "Sequence_IIEF5_5");
 
         IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
         IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
@@ -1413,18 +1519,28 @@ public class RDFManager {
         builder.add(inputVariable1, RDF.TYPE, inputVariable);
 
         builder.add(Observation1, RDF.TYPE, Observation);
+        builder.add(Seq1, RDF.TYPE, Seq);
+        builder.add(Observation1, sequence, Seq1);
         builder.add(Variable1, inputVariable1, Observation1);
 
         builder.add(Observation2, RDF.TYPE, Observation);
+        builder.add(Seq2, RDF.TYPE, Seq);
+        builder.add(Observation2, sequence, Seq2);
         builder.add(Variable2, inputVariable1, Observation2);
 
         builder.add(Observation3, RDF.TYPE, Observation);
+        builder.add(Seq3, RDF.TYPE, Seq);
+        builder.add(Observation3, sequence, Seq3);
         builder.add(Variable3, inputVariable1, Observation3);
 
         builder.add(Observation4, RDF.TYPE, Observation);
+        builder.add(Seq4, RDF.TYPE, Seq);
+        builder.add(Observation4, sequence, Seq4);
         builder.add(Variable4, inputVariable1, Observation4);
 
         builder.add(Observation5, RDF.TYPE, Observation);
+        builder.add(Seq5, RDF.TYPE, Seq);
+        builder.add(Observation5, sequence, Seq5);
         builder.add(Variable5, inputVariable1, Observation5);
 
         builder.add(Dataset1, RDF.TYPE, Dataset);
@@ -1451,6 +1567,9 @@ public class RDFManager {
         IRI Variable5 = factory.createIRI(cmg_vocabulary, "Variable5");
         IRI Variable6 = factory.createIRI(cmg_vocabulary, "Variable6");
 
+        IRI Seq = factory.createIRI(rdf, "Sequence");
+        IRI sequence = factory.createIRI(cmg_vocabulary, "sequence");
+
         IRI LogicalDataset = factory.createIRI(disco, "LogicalDataset");
         IRI Dataset = factory.createIRI(qb, "Dataset");
         IRI Observation = factory.createIRI(qb, "Observation");
@@ -1463,6 +1582,13 @@ public class RDFManager {
         String timestamp = now.format(formatter);
 
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
+
+        IRI Seq1 = factory.createIRI(rdf, "Sequence_WPAI_1");
+        IRI Seq2 = factory.createIRI(rdf, "Sequence_WPAI_2");
+        IRI Seq3 = factory.createIRI(rdf, "Sequence_WPAI_3");
+        IRI Seq4 = factory.createIRI(rdf, "Sequence_WPAI_4");
+        IRI Seq5 = factory.createIRI(rdf, "Sequence_WPAI_5");
+        IRI Seq6 = factory.createIRI(rdf, "Sequence_WPAI_6");
 
         IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
         IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
@@ -1488,21 +1614,33 @@ public class RDFManager {
 
         builder.add(Observation1, RDF.TYPE, Observation);
         builder.add(Variable1, inputVariable1, Observation1);
+        builder.add(Seq1, RDF.TYPE, Seq);
+        builder.add(Observation1, sequence, Seq1);
 
         builder.add(Observation2, RDF.TYPE, Observation);
         builder.add(Variable2, inputVariable1, Observation2);
+        builder.add(Seq2, RDF.TYPE, Seq);
+        builder.add(Observation2, sequence, Seq2);
 
         builder.add(Observation3, RDF.TYPE, Observation);
         builder.add(Variable3, inputVariable1, Observation3);
+        builder.add(Seq3, RDF.TYPE, Seq);
+        builder.add(Observation3, sequence, Seq3);
 
         builder.add(Observation4, RDF.TYPE, Observation);
         builder.add(Variable4, inputVariable1, Observation4);
+        builder.add(Seq4, RDF.TYPE, Seq);
+        builder.add(Observation4, sequence, Seq4);
 
         builder.add(Observation5, RDF.TYPE, Observation);
         builder.add(Variable5, inputVariable1, Observation5);
+        builder.add(Seq5, RDF.TYPE, Seq);
+        builder.add(Observation5, sequence, Seq5);
 
         builder.add(Observation6, RDF.TYPE, Observation);
         builder.add(Variable6, inputVariable1, Observation6);
+        builder.add(Seq6, RDF.TYPE, Seq);
+        builder.add(Observation6, sequence, Seq6);
 
         builder.add(Dataset1, RDF.TYPE, Dataset);
         builder.add(Observation1, dataset1, Dataset1);
@@ -1520,7 +1658,20 @@ public class RDFManager {
         return model;
     }
 
-    // Funzione che ritorna l'intero modello come stringa
+    // Funzione che genera il file RDF corrispondente a un certo modello
+    public static boolean saveRDFToFile(File file, Model model) {
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            Rio.write(model, fos, RDFFormat.TURTLESTAR);
+            file.setReadable(true, false);
+            file.setWritable(true, false);
+            file.setExecutable(true, false);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static String printModel(Model model){
         StringBuilder result = new StringBuilder();
         model.forEach(statement -> {

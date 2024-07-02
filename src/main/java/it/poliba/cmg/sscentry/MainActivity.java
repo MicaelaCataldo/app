@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         Button button3 = findViewById(R.id.button3);
         button3.setText("Compila questionario WPAI");
         Button button4 = findViewById(R.id.button4);
-        button3.setText("Esegui query");
+        button4.setText("Esegui query");
 
     button1.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             if (model == null) {
               Toast.makeText(getBaseContext(), "Failed to read RDF", Toast.LENGTH_LONG).show();
             }else{
-                textView.setText(RDFManager.printModel(model));
+                // textView.setText(RDFManager.printModel(model));
                 // Answers simulation. La seguente hasmap contiene una simulazione delle risposte inserite dal paziente in una compilazione del questionario
                 HashMap<String, String> map = new HashMap<>();
                 map.put("ans1", "1");
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
                 model = RDFManager.addAnswersUCLA(map, model);
                 Toast.makeText(getBaseContext(), "Model updated successfully", Toast.LENGTH_LONG).show();
-                textView.setText(RDFManager.printModel(model));
+                // textView.setText(RDFManager.printModel(model));
                 boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
                 if (saved) {
                   Toast.makeText(getBaseContext(), "RDF saved successfully", Toast.LENGTH_LONG).show();
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
               if (model == null) {
                   Toast.makeText(getBaseContext(), "Failed to read RDF", Toast.LENGTH_LONG).show();
               }else{
-                  textView.setText(RDFManager.printModel(model));
+                  // textView.setText(RDFManager.printModel(model));
                   // Answers simulation. La seguente hasmap contiene una simulazione delle risposte inserite dal paziente in una compilazione del questionario
                   HashMap<String, String> map = new HashMap<>();
                   map.put("ans1", "1");
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
                   model = RDFManager.addAnswersIIEF5(map, model);
                   Toast.makeText(getBaseContext(), "Model updated successfully", Toast.LENGTH_LONG).show();
-                  textView.setText(RDFManager.printModel(model));
+                  // textView.setText(RDFManager.printModel(model));
                   boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
                   if (saved) {
                       Toast.makeText(getBaseContext(), "RDF saved successfully", Toast.LENGTH_LONG).show();
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             if (model == null) {
                 Toast.makeText(getBaseContext(), "Failed to read RDF", Toast.LENGTH_LONG).show();
             }else{
-                textView.setText(RDFManager.printModel(model));
+                // textView.setText(RDFManager.printModel(model));
                 // Answers simulation. La seguente hasmap contiene una simulazione delle risposte inserite dal paziente in una compilazione del questionario
                 HashMap<String, String> map = new HashMap<>();
                 map.put("ans1", "Yes");
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                 model = RDFManager.addAnswersWPAI(map, model);
                 Toast.makeText(getBaseContext(), "Model updated successfully", Toast.LENGTH_LONG).show();
-                textView.setText(RDFManager.printModel(model));
+                // textView.setText(RDFManager.printModel(model));
                 boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
                 if (saved) {
                     Toast.makeText(getBaseContext(), "RDF saved successfully", Toast.LENGTH_LONG).show();
@@ -172,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String queryResult = "query";
                 Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
-                intent.putExtra("queryResult", queryResult);
                 startActivity(intent);
 
             }
