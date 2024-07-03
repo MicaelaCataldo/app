@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+// RDFManager class, that manages the model and the Turtle file
 public class RDFManager {
     // Define the namespace
     public static final String disco = "http://rdf-vocabulary.ddialliance.org/discovery#";
@@ -31,12 +32,11 @@ public class RDFManager {
 
     // Create a ValueFactory to create RDF objects
     public static ValueFactory factory = SimpleValueFactory.getInstance();
-    // private static Model model;
 
+    // Upload on the model an empty version (containing only questions and possible answers) of the UCLA Questionnaire
     public static Model questionnaireUCLADefinition(Model model){
-
-        IRI Study = factory.createIRI(disco, "Study");
         // Create the generic classes that will be instanced as subjects and objects
+        IRI Study = factory.createIRI(disco, "Study");
         IRI Questionnaire = factory.createIRI(disco, "Questionnaire");
         IRI Question = factory.createIRI(disco, "Question");
 
@@ -54,10 +54,9 @@ public class RDFManager {
         IRI instrument = factory.createIRI(disco, "instrument");
 
         IRI section = factory.createIRI(cmg_vocabulary, "section");
-
         IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
 
-        // Create the IRI of instances for UCLA Questionnaire
+        // Create the IRI of instances
         IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
 
         IRI Question1 = factory.createIRI(cmg_vocabulary, "Question_UCLA_1");
@@ -571,9 +570,9 @@ public class RDFManager {
         builder.add(Concept5, RDF.TYPE, Concept);
         builder.add(Concept6, RDF.TYPE, Concept);
 
-        // Create the <ConceptSchemeN hasTopConcept ConceptN> statement for each ConceptScheme1
-        // Create the <tr_hasTopConcept a hasTopConcept> statement for each tr_hasTopConcept
-        // Create the <tr_hasTopConceptN hasScoreN Values.literal(points)> statement for each tr_hasTopConcept
+        // Create the <ConceptSchemeN hasTopConceptM ConceptM> statement for each ConceptScheme
+        // Create the <tr_hasTopConceptM a hasTopConcept> statement for each tr_hasTopConcept
+        // Create the <tr_hasTopConceptM hasScoreN Values.literal(points)> statement for each tr_hasTopConcept
         // Create the <hasScoreN a hasScore> statement for each hasScore
         Triple tr_hasTopConcept1 = factory.createTriple(ConceptScheme1, hasTopConcept1, Concept1);
         builder.add(tr_hasTopConcept1, RDF.TYPE, hasTopConcept);
@@ -607,7 +606,6 @@ public class RDFManager {
 
         // Build the model
         model = builder.build();
-
         return model;
     }
 
@@ -632,7 +630,7 @@ public class RDFManager {
         IRI instrument = factory.createIRI(disco, "instrument");
         IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
 
-        // Create the IRI of instances for UCLA Questionnaire
+        // Create the IRI of instances
         IRI QuestionnaireIIEF5 = factory.createIRI(cmg_vocabulary, "QuestionnaireIIEF5");
 
         IRI Question1 = factory.createIRI(cmg_vocabulary, "Question_IIEF5_1");
@@ -758,8 +756,8 @@ public class RDFManager {
 
         // Create the <RepresentedVariableN representation ConceptSchemeN> statement for each RepresentedVariable
         builder.add(RepresentedVariable1, representation, ConceptScheme1);
-        builder.add(RepresentedVariable1, representation, ConceptScheme2);
-        builder.add(RepresentedVariable1, representation, ConceptScheme3);
+        builder.add(RepresentedVariable2, representation, ConceptScheme2);
+        builder.add(RepresentedVariable3, representation, ConceptScheme3);
 
         // Create the <ConceptN a Concept> statement for each Concept
         builder.add(Concept1, RDF.TYPE, Concept);
@@ -778,9 +776,9 @@ public class RDFManager {
         builder.add(Concept14, RDF.TYPE, Concept);
         builder.add(Concept15, RDF.TYPE, Concept);
 
-        // Create the <ConceptSchemeN hasTopConcept ConceptN> statement for each ConceptScheme1
-        // Create the <tr_hasTopConcept a hasTopConcept> statement for each tr_hasTopConcept
-        // Create the <tr_hasTopConceptN hasScoreN Values.literal(points)> statement for each tr_hasTopConcept
+        // Create the <ConceptSchemeN hasTopConceptM ConceptM> statement for each ConceptScheme
+        // Create the <tr_hasTopConceptN a hasTopConcept> statement for each tr_hasTopConcept
+        // Create the <tr_hasTopConceptN hasScoreM Values.literal(points)> statement for each tr_hasTopConcept
         // Create the <hasScoreN a hasScore> statement for each hasScore
         Triple tr_hasTopConcept1 = factory.createTriple(ConceptScheme1, hasTopConcept1, Concept1);
         builder.add(tr_hasTopConcept1, RDF.TYPE, hasTopConcept);
@@ -884,7 +882,7 @@ public class RDFManager {
         IRI instrument = factory.createIRI(disco, "instrument");
         IRI hasScore = factory.createIRI(cmg_vocabulary, "hasScore");
 
-        // Create the IRI of instances for UCLA Questionnaire
+        // Create the IRI of instances
         IRI QuestionnaireWPAI = factory.createIRI(cmg_vocabulary, "QuestionnaireWPAI");
 
         IRI Question1 = factory.createIRI(cmg_vocabulary, "Question_WPAI_1");
@@ -908,11 +906,9 @@ public class RDFManager {
 
         IRI RepresentedVariable1 = factory.createIRI(cmg_vocabulary, "RepresentedVariable_WPAI_1");
         IRI RepresentedVariable2 = factory.createIRI(cmg_vocabulary, "RepresentedVariable_WPAI_2");
-        IRI RepresentedVariable3 = factory.createIRI(cmg_vocabulary, "RepresentedVariable_WPAI_3");
 
         IRI ConceptScheme1 = factory.createIRI(cmg_vocabulary, "ConceptScheme_WPAI_1");
         IRI ConceptScheme2 = factory.createIRI(cmg_vocabulary, "ConceptScheme_WPAI_2");
-        IRI ConceptScheme3 = factory.createIRI(cmg_vocabulary, "ConceptScheme_WPAI_3");
 
         IRI Concept1 = factory.createIRI(cmg_vocabulary, "Yes");
         IRI Concept2 = factory.createIRI(cmg_vocabulary, "No");
@@ -965,6 +961,7 @@ public class RDFManager {
         builder.add(Question5, RDF.TYPE, Question);
         builder.add(Question6, RDF.TYPE, Question);
 
+        // Create the statement <QuestionnaireWPAI question QuestionN> for each Question
         builder.add(QuestionnaireWPAI, question, Question1);
         builder.add(QuestionnaireWPAI, question, Question2);
         builder.add(QuestionnaireWPAI, question, Question3);
@@ -1028,8 +1025,8 @@ public class RDFManager {
         builder.add(Concept12, RDF.TYPE, Concept);
         builder.add(Concept13, RDF.TYPE, Concept);
 
-        // Create the <ConceptSchemeN hasTopConcept ConceptN> statement for each ConceptScheme1
-        // Create the <tr_hasTopConcept a hasTopConcept> statement for each tr_hasTopConcept
+        // Create the <ConceptSchemeN hasTopConceptM ConceptM> statement for each ConceptScheme
+        // Create the <tr_hasTopConceptN a hasTopConcept> statement for each tr_hasTopConcept
         // Create the <tr_hasTopConceptN hasScoreN Values.literal(points)> statement for each tr_hasTopConcept
         // Create the <hasScoreN a hasScore> statement for each hasScore
         Triple tr_hasTopConcept1 = factory.createTriple(ConceptScheme1, hasTopConcept1, Concept1);
@@ -1103,7 +1100,7 @@ public class RDFManager {
         return model;
     }
 
-    // Funzione per generare tutte le strutture vuote, ossia solo domande e possibili risposte, dei questionari
+    // Method to generate all questionnaires structure, containing just questions and possible answers
     public static Model generateRDF() {
         ModelBuilder builder = new ModelBuilder();
         Model result = builder.build();
@@ -1113,8 +1110,9 @@ public class RDFManager {
         return result;
     }
 
-    // Funzione che aggiunge al modello le risposte fornite in una nuova compilazione del questionario
+    // Method to add answers to the UCLA Questionnaire to the model
     public static Model addAnswersUCLA(@NonNull HashMap<String, String> map, Model model){
+        // Creation of IRIs
         IRI QuestionnaireUCLA = factory.createIRI(cmg_vocabulary, "QuestionnaireUCLA");
         IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
         IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
@@ -1165,6 +1163,7 @@ public class RDFManager {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
         String timestamp = now.format(formatter);
 
+        // Used the timestamp to make every Dataset unique
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
 
         IRI Seq1 = factory.createIRI(rdf, "Sequence_UCLA_1");
@@ -1202,6 +1201,7 @@ public class RDFManager {
         IRI Seq33 = factory.createIRI(rdf, "Sequence_UCLA_33");
         IRI Seq34 = factory.createIRI(rdf, "Sequence_UCLA_34");
 
+        // Used a concatenation of the timestamp, the question number and the answer to to make every Observation unique
         IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
         IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
         IRI Observation3 = factory.createIRI(cmg_vocabulary, timestamp+"_3_"+ map.get("ans3"));
@@ -1246,6 +1246,7 @@ public class RDFManager {
         // Create the model builder
         ModelBuilder builder = new ModelBuilder(model);
 
+        // Add all the statement to the model builder
         builder.add(dataset1, RDF.TYPE, dataset);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
         builder.add(LogicalDataset, instrument1, QuestionnaireUCLA);
@@ -1461,13 +1462,15 @@ public class RDFManager {
         builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
 
+        // Build the model
         model = builder.build();
 
         return model;
     }
 
-    // Funzione che aggiunge al modello le risposte fornite in una nuova compilazione del questionario
+    // Method to add answers to the IIEF5 Questionnaire to the model
     public static Model addAnswersIIEF5(HashMap<String, String> map, Model model){
+        // Creation of IRIs
         IRI QuestionnaireIIEF5 = factory.createIRI(cmg_vocabulary, "QuestionnaireIIEF5");
         IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
         IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
@@ -1489,6 +1492,7 @@ public class RDFManager {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
         String timestamp = now.format(formatter);
 
+        // Used the timestamp to make every Dataset unique
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
 
         IRI Seq1 = factory.createIRI(rdf, "Sequence_IIEF5_1");
@@ -1497,6 +1501,7 @@ public class RDFManager {
         IRI Seq4 = factory.createIRI(rdf, "Sequence_IIEF5_4");
         IRI Seq5 = factory.createIRI(rdf, "Sequence_IIEF5_5");
 
+        // Used a concatenation of the timestamp, the question number and the answer to to make every Observation unique
         IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
         IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
         IRI Observation3 = factory.createIRI(cmg_vocabulary, timestamp+"_3_"+ map.get("ans3"));
@@ -1512,6 +1517,7 @@ public class RDFManager {
         // Create the model builder
         ModelBuilder builder = new ModelBuilder(model);
 
+        // Add all the statement to the model builder
         builder.add(dataset1, RDF.TYPE, dataset);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
         builder.add(LogicalDataset, instrument1, QuestionnaireIIEF5);
@@ -1553,12 +1559,15 @@ public class RDFManager {
         builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
 
+        // Build the model
         model = builder.build();
 
         return model;
     }
 
+    // Method to add answers to the UCLA Questionnaire to the model
     public static Model addAnswersWPAI(HashMap<String, String> map, Model model){
+        // Creation of IRIs
         IRI QuestionnaireWPAI = factory.createIRI(cmg_vocabulary, "QuestionnaireWPAI");
         IRI Variable1 = factory.createIRI(cmg_vocabulary, "Variable1");
         IRI Variable2 = factory.createIRI(cmg_vocabulary, "Variable2");
@@ -1581,6 +1590,7 @@ public class RDFManager {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
         String timestamp = now.format(formatter);
 
+        // Used the timestamp to make every Dataset unique
         IRI Dataset1 = factory.createIRI(cmg_vocabulary, "Dataset_"+timestamp);
 
         IRI Seq1 = factory.createIRI(rdf, "Sequence_WPAI_1");
@@ -1590,6 +1600,7 @@ public class RDFManager {
         IRI Seq5 = factory.createIRI(rdf, "Sequence_WPAI_5");
         IRI Seq6 = factory.createIRI(rdf, "Sequence_WPAI_6");
 
+        // Used a concatenation of the timestamp, the question number and the answer to to make every Observation unique
         IRI Observation1 = factory.createIRI(cmg_vocabulary, timestamp+"_1_"+ map.get("ans1"));
         IRI Observation2 = factory.createIRI(cmg_vocabulary, timestamp+"_2_"+ map.get("ans2"));
         IRI Observation3 = factory.createIRI(cmg_vocabulary, timestamp+"_3_"+ map.get("ans3"));
@@ -1606,6 +1617,7 @@ public class RDFManager {
         // Create the model builder
         ModelBuilder builder = new ModelBuilder(model);
 
+        // Add all the statement to the model builder
         builder.add(dataset1, RDF.TYPE, dataset);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
         builder.add(LogicalDataset, instrument1, QuestionnaireWPAI);
@@ -1653,12 +1665,13 @@ public class RDFManager {
         builder.add(factory.createTriple(LogicalDataset1, aggregation1, Dataset1), RDF.TYPE, aggregation);
         builder.add(LogicalDataset1, RDF.TYPE, LogicalDataset);
 
+        // Build the model
         model = builder.build();
 
         return model;
     }
 
-    // Funzione che genera il file RDF corrispondente a un certo modello
+    // Method to save the model to a Turtle-star file
     public static boolean saveRDFToFile(File file, Model model) {
         try (FileOutputStream fos = new FileOutputStream(file)) {
             Rio.write(model, fos, RDFFormat.TURTLESTAR);
@@ -1672,6 +1685,17 @@ public class RDFManager {
         }
     }
 
+    // Method to read a Turtle-star file and return a Model
+    public static Model readRDFFromFile(File file) {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            return Rio.parse(fis, "", RDFFormat.TURTLESTAR);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Method to return the model as a String ready to be printed
     public static String printModel(Model model){
         StringBuilder result = new StringBuilder();
         model.forEach(statement -> {
@@ -1687,14 +1711,5 @@ public class RDFManager {
             result.append(String.format("%s %s %s.\n", subjectName, predicateName, objectName));
         });
         return result.toString();
-    }
-
-    public static Model readRDFFromFile(File file) {
-        try (FileInputStream fis = new FileInputStream(file)) {
-            return Rio.parse(fis, "", RDFFormat.TURTLESTAR);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

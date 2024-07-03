@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "it.poliba.cmg.sscentry"
-        minSdk 28  // Modifica secondo le tue necessità
+        minSdk 28
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -74,7 +74,6 @@ dependencies {
         exclude group: 'commons-codec', module: 'commons-codec'
     }
 
-    // Aggiungere Xerces per DatatypeFactory
     implementation 'xerces:xercesImpl:2.12.2'
 
     // Test Dependencies
@@ -83,7 +82,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-// Escludere le versioni duplicate delle librerie problematiche
+// Exclude problematic libraries
 configurations {
     all {
         exclude group: 'org.apache.httpcomponents', module: 'httpcore'

@@ -14,6 +14,7 @@ import org.eclipse.rdf4j.model.Model;
 import java.io.File;
 import java.util.HashMap;
 
+// Main activity class, to manage all the buttons and actions within the application
 public class MainActivity extends AppCompatActivity {
 
     public static Model model;
@@ -41,15 +42,15 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             // Check if the file exists
             if (!fileExists()) {
-              createAndSaveRDF();
+                // If the file doesn't exist, create and save a new file
+                createAndSaveRDF();
             }
             // Once file exists, read the file and update the model
             model = RDFManager.readRDFFromFile(new File(getFilesDir(), FILE_NAME));
             if (model == null) {
               Toast.makeText(getBaseContext(), "Failed to read RDF", Toast.LENGTH_LONG).show();
             }else{
-                // textView.setText(RDFManager.printModel(model));
-                // Answers simulation. La seguente hasmap contiene una simulazione delle risposte inserite dal paziente in una compilazione del questionario
+                // Answers simulation
                 HashMap<String, String> map = new HashMap<>();
                 map.put("ans1", "1");
                 map.put("ans2", "0");
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                 model = RDFManager.addAnswersUCLA(map, model);
                 Toast.makeText(getBaseContext(), "Model updated successfully", Toast.LENGTH_LONG).show();
-                // textView.setText(RDFManager.printModel(model));
+
                 boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
                 if (saved) {
                   Toast.makeText(getBaseContext(), "RDF saved successfully", Toast.LENGTH_LONG).show();
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
           public void onClick(View view) {
               // Check if the file exists
               if (!fileExists()) {
+                  // If the file doesn't exist, create and save a new file
                   createAndSaveRDF();
               }
               // Once file exists, read the file and update the model
@@ -111,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
               if (model == null) {
                   Toast.makeText(getBaseContext(), "Failed to read RDF", Toast.LENGTH_LONG).show();
               }else{
-                  // textView.setText(RDFManager.printModel(model));
-                  // Answers simulation. La seguente hasmap contiene una simulazione delle risposte inserite dal paziente in una compilazione del questionario
+                  // Answers simulation
                   HashMap<String, String> map = new HashMap<>();
                   map.put("ans1", "1");
                   map.put("ans2", "0");
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                   model = RDFManager.addAnswersIIEF5(map, model);
                   Toast.makeText(getBaseContext(), "Model updated successfully", Toast.LENGTH_LONG).show();
-                  // textView.setText(RDFManager.printModel(model));
+
                   boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
                   if (saved) {
                       Toast.makeText(getBaseContext(), "RDF saved successfully", Toast.LENGTH_LONG).show();
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             // Check if the file exists
             if (!fileExists()) {
+                // If the file doesn't exist, create and save a new file
                 createAndSaveRDF();
             }
             // Once file exists, read the file and update the model
@@ -146,8 +148,7 @@ public class MainActivity extends AppCompatActivity {
             if (model == null) {
                 Toast.makeText(getBaseContext(), "Failed to read RDF", Toast.LENGTH_LONG).show();
             }else{
-                // textView.setText(RDFManager.printModel(model));
-                // Answers simulation. La seguente hasmap contiene una simulazione delle risposte inserite dal paziente in una compilazione del questionario
+                // Answers simulation
                 HashMap<String, String> map = new HashMap<>();
                 map.put("ans1", "Yes");
                 map.put("ans2", "20");
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
                 model = RDFManager.addAnswersWPAI(map, model);
                 Toast.makeText(getBaseContext(), "Model updated successfully", Toast.LENGTH_LONG).show();
-                // textView.setText(RDFManager.printModel(model));
+
                 boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
                 if (saved) {
                     Toast.makeText(getBaseContext(), "RDF saved successfully", Toast.LENGTH_LONG).show();
@@ -169,35 +170,36 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String queryType = "1";
-                Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
-                intent.putExtra("type", queryType);
-                startActivity(intent);
+    button4.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String queryType = "1";
+            Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
+            intent.putExtra("type", queryType);
+            startActivity(intent);
 
-            }
-        });
+        }
+    });
 
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String queryType = "2";
-                Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
-                intent.putExtra("type", queryType);
-                startActivity(intent);
+    button5.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String queryType = "2";
+            Intent intent = new Intent(MainActivity.this, QueryResultVisualization.class);
+            intent.putExtra("type", queryType);
+            startActivity(intent);
 
-            }
-        });
-
+        }
+    });
 }
 
+    // Check if the file exists
     private boolean fileExists() {
         File file = new File(getFilesDir(), FILE_NAME);
         return file.exists();
     }
 
+    // Create and save a new file with a model containing only questions and possible answers for each type of questionnaire
     private void createAndSaveRDF() {
         model = RDFManager.generateRDF();
         boolean saved = RDFManager.saveRDFToFile(new File(getFilesDir(), FILE_NAME), model);
