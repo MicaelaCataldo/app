@@ -51,30 +51,30 @@ public class MainActivity extends AppCompatActivity {
                 // Answers simulation
                 HashMap<String, String> map = new HashMap<>();
                 map.put("ans1", "1");
-                map.put("ans2", "0");
-                map.put("ans3", "1");
+                map.put("ans2", "1");
+                map.put("ans3", "2");
                 map.put("ans4", "1");
-                map.put("ans5", "0");
+                map.put("ans5", "1");
                 map.put("ans6", "1");
                 map.put("ans7", "2");
-                map.put("ans8", "1");
+                map.put("ans8", "3");
                 map.put("ans9", "1");
-                map.put("ans10", "3");
-                map.put("ans11", "1");
+                map.put("ans10", "1");
+                map.put("ans11", "2");
                 map.put("ans12", "1");
-                map.put("ans13", "0");
+                map.put("ans13", "2");
                 map.put("ans14", "2");
                 map.put("ans15", "1");
                 map.put("ans16", "1");
                 map.put("ans17", "3");
-                map.put("ans18", "1");
-                map.put("ans19", "1");
+                map.put("ans18", "2");
+                map.put("ans19", "0");
                 map.put("ans20", "1");
                 map.put("ans21", "0");
-                map.put("ans22", "1");
+                map.put("ans22", "2");
                 map.put("ans23", "3");
                 map.put("ans24", "2");
-                map.put("ans25", "1");
+                map.put("ans25", "2");
                 map.put("ans26", "1");
                 map.put("ans27", "0");
                 map.put("ans28", "1");
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 map.put("ans30", "1");
                 map.put("ans31", "0");
                 map.put("ans32", "0");
-                map.put("ans33", "1");
+                map.put("ans33", "3");
                 map.put("ans34", "0");
 
                 model = RDFManager.addAnswersUCLA(map, model);
@@ -113,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
               }else{
                   // Answers simulation
                   HashMap<String, String> map = new HashMap<>();
-                  map.put("ans1", "1");
-                  map.put("ans2", "0");
+                  map.put("ans1", "4");
+                  map.put("ans2", "2");
                   map.put("ans3", "1");
-                  map.put("ans4", "1");
+                  map.put("ans4", "3");
                   map.put("ans5", "0");
 
                   model = RDFManager.addAnswersIIEF5(map, model);
@@ -149,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
                 // Answers simulation
                 HashMap<String, String> map = new HashMap<>();
                 map.put("ans1", "Yes");
-                map.put("ans2", "20");
-                map.put("ans3", "24");
-                map.put("ans4", "29");
-                map.put("ans5", "3");
+                map.put("ans2", "2");
+                map.put("ans3", "3");
+                map.put("ans4", "32");
+                map.put("ans5", "7");
                 map.put("ans6", "8");
 
                 model = RDFManager.addAnswersWPAI(map, model);

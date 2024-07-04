@@ -45,7 +45,7 @@ public class QueryResultVisualization extends AppCompatActivity {
             // Execute the "Type 2" query
             IRI subject = null;
             IRI predicate = factory.createIRI(RDFManager.cmg_vocabulary, "dataset");
-            IRI object = factory.createIRI(RDFManager.cmg_vocabulary, "Dataset_2024/07/02_09:33:52");
+            IRI object = factory.createIRI(RDFManager.cmg_vocabulary, "Dataset_2024/07/04_11:44:21");
 
             // Execute the query
             Model newModel = getQueryResult(model, subject, predicate, object);
