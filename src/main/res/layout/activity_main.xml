@@ -48,12 +48,7 @@
                 android:text="Run query 2"
                 android:layout_marginBottom="16dp" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:textSize="16sp" />
+
         </LinearLayout>
 
     </ScrollView>
